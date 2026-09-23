@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Booking Cancelled - {{ hotel_settings.hotel_name }}
+</title>
+
+</head>
+
+
+<body style="
+margin:0;
+padding:0;
+background:#f4f4f4;
+font-family:Arial,sans-serif;
+">
+
+
+<table width="100%"
+       cellpadding="0"
+       cellspacing="0">
+
+<tr>
+
+<td align="center">
+
+
+<table width="650"
+       cellpadding="0"
+       cellspacing="0"
+       style="
+       background:#ffffff;
+       border-radius:15px;
+       overflow:hidden;
+       ">
+
+
+<!-- HEADER -->
+
+<tr>
+
+<td align="center"
+    style="
+    background:#4c1d95;
+    padding:35px;
+    ">
+
+<h1 style="
+color:white;
+margin:0;
+">
+
+{{ hotel_settings.hotel_name }}
+
+</h1>
+
+
+<p style="
+color:#f5c542;
+margin-top:10px;
+">
+
+Booking Cancellation
+
+</p>
+
+</td>
+
+</tr>
+
+
+<!-- CONTENT -->
+
+<tr>
+
+<td style="padding:40px;">
+
+
+<h2 style="
+color:#4c1d95;
+">
+
+Hello {{ user.first_name|default:user.username }},
+
+</h2>
+
+
+<p style="
+font-size:16px;
+color:#555;
+line-height:1.8;
+">
+
+Your booking has been successfully cancelled.
+
+</p>
+
+
+<hr>
+
+
+<h3 style="
+color:#4c1d95;
+">
+
+Cancellation Details
+
+</h3>
+
+
+<p>
+
+<strong>Booking ID:</strong>
+
+{{ booking.id }}
+
+</p>
+
+
+<p>
+
+<strong>Room:</strong>
+
+{{ booking.room.room_type }}
+
+</p>
+
+
+<p>
+
+<strong>Room Number:</strong>
+
+{{ booking.room.room_number }}
+
+</p>
+
+
+<p>
+
+<strong>Check In:</strong>
+
+{{ booking.check_in }}
+
+</p>
+
+
+<p>
+
+<strong>Check Out:</strong>
+
+{{ booking.check_out }}
+
+</p>
+
+
+<p>
+
+<strong>Total Amount:</strong>
+
+₹{{ booking.total_price }}
+
+</p>
+
+
+<hr>
+
+
+<p style="
+font-size:15px;
+color:#666;
+line-height:1.8;
+">
+
+We hope to welcome you again soon.
+
+<br>
+
+Thank you for choosing
+
+<b>
+{{ hotel_settings.hotel_name }}.
+</b>
+
+</p>
+
+
+<!-- HOTEL CONTACT -->
+
+<p style="
+font-size:14px;
+color:#777;
+line-height:1.7;
+margin-top:25px;
+">
+
+<strong>
+{{ hotel_settings.hotel_name }}
+</strong>
+
+<br>
+
+{{ hotel_settings.hotel_address }}
+
+<br>
+
+{{ hotel_settings.hotel_phone }}
+
+<br>
+
+{{ hotel_settings.hotel_email }}
+
+</p>
+
+
+</td>
+
+</tr>
+
+
+<!-- FOOTER -->
+
+<tr>
+
+<td align="center"
+    style="
+    background:#4c1d95;
+    padding:20px;
+    color:white;
+    ">
+
+{{ hotel_settings.hotel_name }}
+
+<br>
+
+Luxury • Comfort • Excellence
+
+</td>
+
+</tr>
+
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+
+</body>
+
+</html>

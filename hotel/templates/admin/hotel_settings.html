@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Hotel Settings | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_settings.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="settings-page">
+
+    <div class="settings-header">
+
+        <div>
+
+            <h1>Hotel Settings</h1>
+
+            <p>
+                Configure your Luxury Grand Hotel information.
+            </p>
+
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="back-dashboard">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="settings-message">
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="settings-card">
+
+        <div class="settings-card-header">
+
+            <div class="settings-icon">
+                🏨
+            </div>
+
+            <div>
+
+                <h2>Hotel Information</h2>
+
+                <p>
+                    Update the information displayed throughout your hotel system.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="POST"
+              class="settings-form">
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label>
+                    Hotel Name
+                </label>
+
+                <input
+                    type="text"
+                    name="hotel_name"
+                    value="{{ hotel_name }}"
+                    placeholder="Luxury Grand Hotel"
+                    required>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Hotel Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="hotel_email"
+                        value="{{ hotel_email }}"
+                        placeholder="contact@luxurygrandhotel.com">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Contact Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="hotel_phone"
+                        value="{{ hotel_phone }}"
+                        placeholder="+91 XXXXX XXXXX">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Hotel Address
+                </label>
+
+                <textarea
+                    name="hotel_address"
+                    placeholder="Enter hotel address">{{ hotel_address }}</textarea>
+
+            </div>
+
+
+            <div class="settings-actions">
+
+                <button
+                    type="submit"
+                    class="save-settings">
+
+                    Save Hotel Settings
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

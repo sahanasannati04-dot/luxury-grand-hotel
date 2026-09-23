@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Admin Profile | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_settings.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="settings-page">
+
+    <div class="settings-header">
+
+        <div>
+
+            <h1>Admin Profile</h1>
+
+            <p>
+                Manage your Luxury Grand Hotel administrator profile.
+            </p>
+
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="back-dashboard">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="settings-message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="settings-card">
+
+        <div class="settings-card-header">
+
+            <div class="settings-icon">
+                👤
+            </div>
+
+            <div>
+
+                <h2>Administrator Information</h2>
+
+                <p>
+                    Update your administrator account information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="POST"
+              class="settings-form">
+
+            {% csrf_token %}
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="first_name"
+                        value="{{ request.user.first_name }}"
+                        placeholder="First name">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="last_name"
+                        value="{{ request.user.last_name }}"
+                        placeholder="Last name">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    value="{{ request.user.username }}"
+                    disabled>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ request.user.email }}"
+                    placeholder="admin@luxurygrandhotel.com">
+
+            </div>
+
+
+            <div class="settings-actions">
+
+                <button
+                    type="submit"
+                    class="save-settings">
+
+                    Save Profile
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

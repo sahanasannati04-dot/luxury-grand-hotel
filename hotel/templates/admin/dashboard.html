@@ -1,0 +1,985 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Dashboard | Luxury Grand Hotel
+{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_dashboard.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-wrapper">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-logo">
+
+            <h2>Luxury Grand</h2>
+
+            <span>Administration</span>
+
+        </div>
+
+
+        <nav class="admin-nav">
+
+            <a href="{% url 'admin_dashboard' %}" class="active">
+
+                <span>📊</span>
+
+                <strong>Dashboard</strong>
+
+            </a>
+
+
+            <a href="#bookings">
+
+                <span>📋</span>
+
+                <strong>Bookings</strong>
+
+            </a>
+
+
+            <a href="#rooms">
+
+                <span>🏨</span>
+
+                <strong>Rooms</strong>
+
+            </a>
+
+
+            <a href="#users">
+
+                <span>👥</span>
+
+                <strong>Users</strong>
+
+            </a>
+
+
+            <a href="#revenue">
+
+                <span>💰</span>
+
+                <strong>Revenue</strong>
+
+            </a>
+
+
+            <a href="#reports">
+
+                <span>📈</span>
+
+                <strong>Reports</strong>
+
+            </a>
+
+
+            <a href="#settings">
+
+                <span>⚙️</span>
+
+                <strong>Settings</strong>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <p>System Status</p>
+
+            <strong>● All systems operational</strong>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="dashboard-topbar">
+
+            <div class="dashboard-heading">
+
+                <h1>Good Evening, Admin 👋</h1>
+
+                <p>
+                    Here's what's happening at Luxury Grand Hotel today.
+                </p>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    👑
+                </div>
+
+                <div class="admin-profile-info">
+
+                    <strong>
+                        Hotel Administrator
+                    </strong>
+
+                    <span>
+                        Super Admin
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
+
+        <section class="stats-grid">
+
+
+            <!-- USERS -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                    <span class="stat-label">
+                        Users
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ total_users|default:"0" }}
+                </div>
+
+                <div class="stat-change">
+                    ↑ Registered guests
+                </div>
+
+            </div>
+
+
+
+            <!-- ROOMS -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        🏨
+                    </div>
+
+                    <span class="stat-label">
+                        Rooms
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ total_rooms|default:"0" }}
+                </div>
+
+                <div class="stat-change">
+                    ↑ Hotel inventory
+                </div>
+
+            </div>
+
+
+
+            <!-- BOOKINGS -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        📋
+                    </div>
+
+                    <span class="stat-label">
+                        Bookings
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ total_bookings|default:"0" }}
+                </div>
+
+                <div class="stat-change">
+                    ↑ Total reservations
+                </div>
+
+            </div>
+
+
+
+            <!-- REVENUE -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon">
+                        💰
+                    </div>
+
+                    <span class="stat-label">
+                        Revenue
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    ₹{{ total_revenue|default:"0" }}
+                </div>
+
+                <div class="stat-change">
+                    ↑ Booking revenue
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REVENUE + BOOKING STATUS
+             ================================================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- REVENUE -->
+
+            <section class="glass-panel" id="revenue">
+
+                <div class="panel-header">
+
+                    <div class="panel-title">
+
+                        <h3>Revenue Overview</h3>
+
+                        <p>
+                            Hotel revenue performance
+                        </p>
+
+                    </div>
+
+                    <a href="#reports"
+                       class="view-all">
+
+                        View Reports →
+
+                    </a>
+
+                </div>
+
+
+                <div class="revenue-body">
+
+                    <div class="revenue-summary">
+
+                        <div>
+
+                            <div class="revenue-number">
+                                ₹{{ total_revenue|default:"0" }}
+                            </div>
+
+                            <div class="revenue-caption">
+                                Total booking revenue
+                            </div>
+
+                        </div>
+
+
+                        <div class="revenue-growth">
+                            ↗ Growing
+                        </div>
+
+                    </div>
+
+
+                    <!-- Premium visual chart -->
+
+                    <div class="revenue-chart">
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 35%;">
+                            </div>
+                            <div class="chart-month">Jan</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 50%;">
+                            </div>
+                            <div class="chart-month">Feb</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 42%;">
+                            </div>
+                            <div class="chart-month">Mar</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 65%;">
+                            </div>
+                            <div class="chart-month">Apr</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 58%;">
+                            </div>
+                            <div class="chart-month">May</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 78%;">
+                            </div>
+                            <div class="chart-month">Jun</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 70%;">
+                            </div>
+                            <div class="chart-month">Jul</div>
+                        </div>
+
+                        <div class="chart-column">
+                            <div class="chart-bar"
+                                 style="height: 88%;">
+                            </div>
+                            <div class="chart-month">Aug</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- BOOKING STATUS -->
+
+            <section class="glass-panel">
+
+                <div class="panel-header">
+
+                    <div class="panel-title">
+
+                        <h3>Booking Status</h3>
+
+                        <p>
+                            Reservation overview
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-body">
+
+
+                    <div class="status-item">
+
+                        <div class="status-row">
+
+                            <span class="status-name">
+                                Confirmed
+                            </span>
+
+                            <span class="status-count">
+                                {{ confirmed_bookings|default:"0" }}
+                            </span>
+
+                        </div>
+
+                        <div class="status-progress confirmed">
+
+                            <span style="width: 75%;"></span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="status-item">
+
+                        <div class="status-row">
+
+                            <span class="status-name">
+                                Pending
+                            </span>
+
+                            <span class="status-count">
+                                {{ pending_bookings|default:"0" }}
+                            </span>
+
+                        </div>
+
+                        <div class="status-progress pending">
+
+                            <span style="width: 35%;"></span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="status-item">
+
+                        <div class="status-row">
+
+                            <span class="status-name">
+                                Cancelled
+                            </span>
+
+                            <span class="status-count">
+                                {{ cancelled_bookings|default:"0" }}
+                            </span>
+
+                        </div>
+
+                        <div class="status-progress cancelled">
+
+                            <span style="width: 18%;"></span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+             ================================================= -->
+
+        <section class="glass-panel"
+                 style="margin-bottom:20px;">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <h3>Quick Actions</h3>
+
+                    <p>
+                        Manage your hotel faster
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <a href="{% url 'admin_room_add' %}"
+                   class="quick-action">
+
+                    <span>➕</span>
+
+                    Add Room
+
+                </a>
+
+
+                <a href="{% url 'admin_bookings' %}"
+                   class="quick-action">
+
+                    <span>📋</span>
+
+                    Manage Bookings
+
+                </a>
+
+
+                <a href="{% url 'admin_users' %}"
+                   class="quick-action">
+
+                    <span>👥</span>
+
+                    View Users
+
+                </a>
+
+
+                <a href="{% url 'admin_reports' %}"
+                   class="quick-action">
+
+                    <span>📊</span>
+
+                    Generate Report
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT BOOKINGS
+             ================================================= -->
+
+        <section class="glass-panel"
+                 id="bookings"
+                 style="margin-bottom:20px;">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <h3>Recent Bookings</h3>
+
+                    <p>
+                        Latest hotel reservations
+                    </p>
+
+                </div>
+
+                <a href="#bookings"
+                   class="view-all">
+
+                    View All →
+
+                </a>
+
+            </div>
+
+
+            <div class="booking-table-wrapper">
+
+                <table class="booking-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Guest</th>
+
+                            <th>Room</th>
+
+                            <th>Check In</th>
+
+                            <th>Check Out</th>
+
+                            <th>Amount</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for booking in recent_bookings %}
+
+                        <tr>
+
+                            <td>
+
+                                <div class="guest-info">
+
+                                    <div class="guest-avatar">
+                                        👤
+                                    </div>
+
+                                    <div>
+
+                                        <span class="guest-name">
+                                            {{ booking.user.username }}
+                                        </span>
+
+                                        <span class="guest-email">
+                                            {{ booking.user.email }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Room {{ booking.room.room_number }}
+                            </td>
+
+
+                            <td>
+                                {{ booking.check_in }}
+                            </td>
+
+
+                            <td>
+                                {{ booking.check_out }}
+                            </td>
+
+
+                            <td>
+                                ₹{{ booking.total_price }}
+                            </td>
+
+
+                            <td>
+
+                                {% if booking.status == "Confirmed" %}
+
+                                <span class="status-badge status-confirmed">
+                                    Confirmed
+                                </span>
+
+                                {% elif booking.status == "Pending" %}
+
+                                <span class="status-badge status-pending">
+                                    Pending
+                                </span>
+
+                                {% elif booking.status == "Cancelled" %}
+
+                                <span class="status-badge status-cancelled">
+                                    Cancelled
+                                </span>
+
+                                {% else %}
+
+                                <span class="status-badge">
+                                    {{ booking.status }}
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="6"
+                                style="
+                                    text-align:center;
+                                    padding:35px;
+                                    color:rgba(255,255,255,0.5);
+                                ">
+
+                                No recent bookings found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ROOM AVAILABILITY
+             ================================================= -->
+
+        <section class="glass-panel"
+                 id="rooms">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <h3>Room Availability</h3>
+
+                    <p>
+                        Current room inventory
+                    </p>
+
+                </div>
+
+                <a href="{% url 'admin_rooms' %}" class="view-all">
+                    Manage Rooms →
+                </a>
+
+            </div>
+
+
+            <div class="rooms-grid">
+
+
+                <div class="room-mini">
+
+                    <div class="room-number">
+                        {{ available_rooms|default:"0" }}
+                    </div>
+
+                    <div class="room-type">
+                        Available Rooms
+                    </div>
+
+                    <div class="room-state room-available">
+                        Available
+                    </div>
+
+                </div>
+
+
+
+                <div class="room-mini">
+
+                    <div class="room-number">
+                        {{ occupied_rooms|default:"0" }}
+                    </div>
+
+                    <div class="room-type">
+                        Occupied Rooms
+                    </div>
+
+                    <div class="room-state room-occupied">
+                        Occupied
+                    </div>
+
+                </div>
+
+
+
+                <div class="room-mini">
+
+                    <div class="room-number">
+                        {{ total_rooms|default:"0" }}
+                    </div>
+
+                    <div class="room-type">
+                        Total Inventory
+                    </div>
+
+                    <div class="room-state">
+                        Hotel Rooms
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+         <!-- =================================================
+        REPORTS
+         ================================================= -->
+
+        <section class="glass-panel"
+                 id="reports"
+                 style="margin-top:20px; margin-bottom:20px;">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <h3>Reports</h3>
+
+                    <p>
+                        Hotel performance and booking reports
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div style="padding:25px;">
+
+                <div class="rooms-grid">
+
+                    <div class="room-mini">
+
+                        <div class="room-number">
+                            {{ total_bookings|default:"0" }}
+                        </div>
+
+                        <div class="room-type">
+                            Total Bookings
+                        </div>
+
+                    </div>
+
+
+                    <div class="room-mini">
+
+                        <div class="room-number">
+                            {{ confirmed_bookings|default:"0" }}
+                        </div>
+
+                        <div class="room-type">
+                            Confirmed Bookings
+                        </div>
+
+                    </div>
+
+
+                    <div class="room-mini">
+
+                        <div class="room-number">
+                            ₹{{ total_revenue|default:"0" }}
+                        </div>
+
+                        <div class="room-type">
+                            Total Revenue
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+        
+        <!-- =================================================
+         SETTINGS
+         ================================================= -->
+
+        <section class="glass-panel"
+                 id="settings"
+                 style="margin-bottom:20px;">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <h3>Settings</h3>
+
+                    <p>
+                        Manage hotel administration settings
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div style="padding:25px;">
+
+               <div class="quick-actions">
+
+                    <a href="{% url 'hotel_settings' %}"
+                     class="quick-action">
+
+                       <span>🏨</span>
+
+                        Hotel Settings
+
+                    </a>
+
+
+                    <a href="{% url 'notification_settings' %}"
+                        class="quick-action">
+
+                         <span>🔔</span>
+
+                         Notifications
+
+                    </a>
+
+
+                    <a href="{% url 'security_settings' %}"
+                       class="quick-action">
+
+                        <span>🔐</span>
+
+                         Security
+
+                    </a>
+
+
+                    <a href="{% url 'admin_profile' %}"
+                       class="quick-action">
+
+                         <span>👤</span>
+
+                          Admin Profile
+
+                    </a>
+  
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+
+        <div class="dashboard-footer">
+
+            © 2026 Luxury Grand Hotel ·
+            Premium Hotel Management System
+
+        </div>
+
+
+    </main>
+
+</div>
+  
+{% endblock %}

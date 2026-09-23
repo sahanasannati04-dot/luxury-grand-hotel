@@ -1,0 +1,629 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body_class %}home-page{% endblock %}
+
+{% block content %}
+
+<section class="hero-section reveal">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-100">
+
+            <!-- Left Side -->
+
+            <div class="col-lg-7">
+
+                <span class="hero-badge">
+
+                    ⭐ Luxury • Comfort • Experience
+
+                </span>
+
+                <h1 class="hero-title mt-4">
+
+                    Experience
+
+                    <span class="gold-text">
+
+                        Timeless Luxury
+
+                    </span>
+
+                </h1>
+
+                <p class="hero-subtitle">
+
+                    Escape into a world of elegance where every stay is crafted
+                    with exceptional hospitality, luxurious suites,
+                    fine dining and unforgettable experiences.
+
+                </p>
+
+                    <div class="mt-5">
+
+                    <a href="{% url 'rooms' %}" class="btn hero-btn">
+
+                        Book Your Stay
+
+                    </a>
+
+                    <a href="{% url 'gallery' %}" class="btn hero-outline">
+                        Explore Hotel
+
+                    </a>
+
+                </div>
+
+            <div class="hero-stats mt-5 reveal">
+
+                <div>
+
+                   <h3 class="counter" data-target="250">0</h3>
+
+                   <p>Luxury Rooms</p>
+
+                </div>
+
+                <div>
+
+                   <h3 class="counter" data-target="18000">0</h3>
+
+                   <p>Happy Guests</p>
+
+                </div>
+
+                <div>
+
+                   <h3 class="counter" data-target="4.9">0</h3>
+
+                   <p>Guest Rating</p>
+
+                </div>
+
+            </div>
+
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="col-lg-5">
+
+                <div class="glass-booking reveal">
+
+                    <h3>
+
+                        Reserve Your Stay
+
+                    </h3>
+
+                    <p>
+
+                        Experience premium hospitality with elegant rooms and world-class service.
+
+                    </p>
+
+                    <a href="#booking-search" class="btn book-now-btn w-100">
+
+                        Check Availability
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     Premium Booking Search
+========================================== -->
+
+<section id="booking-search" class="container booking-search-section">
+
+    <form
+        action="{% url 'rooms' %}"
+        method="GET"
+        class="glass-search">
+
+        <div class="row g-4 align-items-center">
+
+            <div class="col-lg-3">
+
+                <label class="search-label">
+
+                    Check In
+
+                </label>
+
+                <input
+                   type="date"
+                   name="check_in"
+                   class="form-control premium-input">
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <label class="search-label">
+
+                    Check Out
+
+                </label>
+
+                <input
+                   type="date"
+                   name="check_out"
+                   class="form-control premium-input">
+
+            </div>
+
+            <div class="col-lg-2">
+
+                <label class="search-label">
+
+                    Guests
+
+                </label>
+
+                <select
+                    name="guests"
+                    class="form-select premium-input">
+                    
+                      <option value="1">1 Guest</option>
+                      <option value="2">2 Guests</option>
+                      <option value="3">3 Guests</option>
+                      <option value="4">4 Guests</option>
+                      <option value="5">5 Guests</option>
+                      <option value="6">6 Guests</option>
+                      <option value="7">7 Guests</option>
+                      <option value="8">8 Guests</option>
+                      <option value="9">9 Guests</option>
+                      <option value="10">10 Guests</option>
+                    
+                </select>
+
+            </div>
+
+            <div class="col-lg-2">
+
+                <label class="search-label">
+
+                    Room
+
+                </label>
+
+                <select
+                    name="search"
+                    class="form-select premium-input">
+
+                    <option value="Single Room">Single Room</option>
+
+                    <option value="Deluxe Room">Deluxe Room</option>
+
+                    <option value="Luxury Room">Luxury Room</option>
+
+                    <option value="Executive Room">Executive Room</option>
+
+                    <option value="Family Suite">Family Suite</option>
+
+                    <option value="Presidential Suite">Presidential Suite</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-lg-2 d-flex align-items-end">
+
+                <button
+                    type="submit"
+                    class="btn search-btn w-100">
+
+                    Check Rooms
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<!-- ==========================================
+    service section
+========================================== -->
+<section class="services-section reveal">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Why Choose Us
+            </h2>
+
+            <p>
+                Experience luxury, comfort and exceptional hospitality.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-3">
+
+                <div class="service-card">
+
+                    <i class="bi bi-stars"></i>
+
+                    <h4>Luxury Rooms</h4>
+
+                    <p>
+                        Elegant rooms with premium interiors.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="service-card">
+
+                    <i class="bi bi-cup-hot"></i>
+
+                    <h4>Restaurant</h4>
+
+                    <p>
+                        Multi-cuisine dining from expert chefs.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="service-card">
+
+                    <i class="bi bi-water"></i>
+
+                    <h4>Swimming Pool</h4>
+
+                    <p>
+                        Relax in our infinity pool.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="service-card">
+
+                    <i class="bi bi-wifi"></i>
+
+                    <h4>Free WiFi</h4>
+
+                    <p>
+                        High-speed internet throughout the hotel.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     Featured Luxury Rooms
+========================================== -->
+
+<section class="featured-rooms reveal">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Featured Luxury Rooms
+            </h2>
+
+            <p>
+                Discover our finest rooms designed for comfort and luxury.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for room in rooms|slice:":3" %}
+
+            <div class="col-lg-4">
+
+                <div class="featured-room-card">
+
+                    {% if room.image %}
+                        <img src="{{ room.image.url }}"
+                             alt="{{ room.room_type }}">
+                    {% else %}
+                        <img src="{% static 'images/default-room.jpg' %}"
+                             alt="Room">
+                    {% endif %}
+
+                    <div class="featured-room-content">
+
+                        <h4>{{ room.room_type }}</h4>
+
+                        <p>Room No: {{ room.room_number }}</p>
+
+                        <div class="room-price">
+                            ₹{{ room.price }}
+                            <span>/ night</span>
+                        </div>
+
+                        <a href="{% url 'rooms' %}"
+                           class="btn hero-btn mt-3">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12 text-center">
+
+                <p class="text-light">
+                    No rooms available at the moment.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="testimonials-section reveal">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                What Our Guests Say
+            </h2>
+
+            <p>
+                Experiences shared by our happy guests.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <div class="stars">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p>
+                        "The rooms were luxurious, the staff was incredibly
+                        friendly, and the stay exceeded all our expectations."
+                    </p>
+
+                    <div class="guest-info">
+
+                        <h5>Rahul Sharma</h5>
+
+                        <small>Mumbai, India</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <div class="stars">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p>
+                        "Excellent hospitality, beautiful interiors, and an
+                        unforgettable dining experience."
+                    </p>
+
+                    <div class="guest-info">
+
+                        <h5>Priya Reddy</h5>
+
+                        <small>Hyderabad, India</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <div class="stars">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p>
+                        "One of the best luxury hotels I've visited. Highly
+                        recommended for families and business travelers."
+                    </p>
+
+                    <div class="guest-info">
+
+                        <h5>Arjun Mehta</h5>
+
+                        <small>Bengaluru, India</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     FAQ SECTION
+========================================== -->
+
+<section class="faq-section reveal">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Frequently Asked Questions
+            </h2>
+
+            <p>
+                Everything you need to know before your stay.
+            </p>
+
+        </div>
+
+        <div class="accordion premium-accordion" id="faqAccordion">
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq1">
+
+                        What time is check-in and check-out?
+
+                    </button>
+
+                </h2>
+
+                <div id="faq1"
+                     class="accordion-collapse collapse show"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        Check-in begins at <strong>2:00 PM</strong> and check-out is before <strong>11:00 AM</strong>.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq2">
+
+                        Is breakfast included?
+
+                    </button>
+
+                </h2>
+
+                <div id="faq2"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        Yes, complimentary breakfast is included with selected room categories.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq3">
+
+                        Is free Wi-Fi available?
+
+                    </button>
+
+                </h2>
+
+                <div id="faq3"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        Yes, complimentary high-speed Wi-Fi is available throughout the hotel.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,479 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Luxury Rooms
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==========================
+        ROOMS HERO SECTION
+=========================== -->
+
+<section class="rooms-hero reveal">
+
+    <div class="rooms-overlay"></div>
+
+    <div class="container">
+
+        <div class="rooms-hero-content">
+
+            <h1>
+                Luxury Rooms
+            </h1>
+
+            <p>
+                Find Your Perfect Stay in Comfort
+            </p>
+
+            <span>
+                Luxury • Comfort • Elegance
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================
+        SEARCH SECTION
+=========================== -->
+
+<section class="room-search-section">
+    <div class="container">
+        <div class="room-search-box">
+            <form action="{% url 'rooms' %}" method="get">
+                <div class="row g-3 align-items-center">
+
+                    <div class="col-lg-3 col-md-12">
+                        <input name="search" type="text" class="form-control" placeholder="Search Rooms" value="{{ request.GET.search }}">
+                    </div>
+
+                    <div class="col-lg-2 col-md-6">
+                        <select name="room_type" class="form-select">
+                            <option value="" {% if not request.GET.room_type %}selected{% endif %}>Room Type</option>
+                            <option value="Single Room" {% if request.GET.room_type == 'Single Room' %}selected{% endif %}>Single Room</option>
+                            <option value="Deluxe Room" {% if request.GET.room_type == 'Deluxe Room' %}selected{% endif %}>Deluxe Room</option>
+                            <option value="Luxury Room" {% if request.GET.room_type == 'Luxury Room' %}selected{% endif %}>Luxury Room</option>
+                            <option value="Executive Room" {% if request.GET.room_type == 'Executive Room' %}selected{% endif %}>Executive Room</option>
+                            <option value="Family Suite" {% if request.GET.room_type == 'Family Suite' %}selected{% endif %}>Family Suite</option>
+                            <option value="Presidential Suite" {% if request.GET.room_type == 'Presidential Suite' %}selected{% endif %}>Presidential Suite</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6">
+                        <select name="guests" class="form-select">
+                            <option value="" {% if not request.GET.guests %}selected{% endif %}>Guests</option>
+                            <option value="1" {% if request.GET.guests == '1' %}selected{% endif %}>1 Guest</option>
+                            <option value="2" {% if request.GET.guests == '2' %}selected{% endif %}>2 Guests</option>
+                            <option value="3" {% if request.GET.guests == '3' %}selected{% endif %}>3 Guests</option>
+                            <option value="4" {% if request.GET.guests == '4' %}selected{% endif %}>4+ Guests</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6">
+                        <select name="price_range" class="form-select">
+                            <option value="" {% if not request.GET.price_range %}selected{% endif %}>Price</option>
+                            <option value="under_5000" {% if request.GET.price_range == 'under_5000' %}selected{% endif %}>Under ₹5000</option>
+                            <option value="5000_10000" {% if request.GET.price_range == '5000_10000' %}selected{% endif %}>₹5000 - ₹10000</option>
+                            <option value="above_10000" {% if request.GET.price_range == 'above_10000' %}selected{% endif %}>Above ₹10000</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12">
+                        <button type="submit" class="btn room-search-btn w-100">
+                            Search
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<!-- ==========================
+        FEATURED ROOMS
+=========================== -->
+
+
+<section class="rooms-section">
+
+
+<div class="container">
+
+
+
+<div class="section-heading text-center">
+
+
+<h2>
+Featured Rooms
+</h2>
+
+
+<p>
+Elegant rooms designed for unforgettable experiences.
+</p>
+
+
+</div>
+
+
+
+<div class="row g-4">
+
+
+
+{% for room in rooms %}
+
+
+
+
+<div class="col-lg-4 col-md-6">
+
+
+
+<div class="luxury-room-card reveal">
+
+
+
+<!-- IMAGE -->
+
+<div class="room-image">
+
+
+<img src="{{ room.image.url }}"
+alt="{{ room.room_type }}">
+
+
+
+<div class="room-badge">
+
+
+{% if room.average_rating %}
+
+⭐ Best Seller
+
+
+{% else %}
+
+🆕 New
+
+
+{% endif %}
+
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- CONTENT -->
+
+
+<div class="room-content">
+
+
+
+<h3>
+
+{{ room.room_type }}
+
+</h3>
+
+
+
+
+<!-- RATING -->
+
+
+<div class="room-rating">
+
+
+{% if room.average_rating %}
+
+
+⭐ {{ room.average_rating|floatformat:1 }}/5
+
+<span>
+
+({{ room.review_count }} Reviews)
+
+</span>
+
+
+
+{% else %}
+
+
+<span>
+No reviews yet
+</span>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+
+<p>
+
+{{ room.description|truncatewords:18 }}
+
+</p>
+
+
+
+<!-- AMENITIES -->
+
+
+<div class="room-amenities">
+
+
+<h6>
+Amenities
+</h6>
+
+
+
+<ul>
+
+
+<li>
+✓ Free Wi-Fi
+</li>
+
+
+<li>
+✓ Breakfast Included
+</li>
+
+
+<li>
+✓ Air Conditioning
+</li>
+
+
+<li>
+✓ Smart TV
+</li>
+
+
+</ul>
+
+
+
+</div>
+
+
+
+<!-- PRICE -->
+
+
+<div class="room-price">
+
+
+₹{{ room.price }}
+
+<span>
+/ Night
+</span>
+
+
+</div>
+
+
+
+<!-- REVIEWS -->
+
+
+<div class="room-reviews">
+
+
+<h6>
+Recent Reviews
+</h6>
+
+
+
+{% for review in room.reviews.all|slice:":2" %}
+
+
+
+<div class="review-box">
+
+
+<strong>
+{{ review.user.username }}
+</strong>
+
+
+<span class="verified">
+
+✔ Verified Stay
+
+</span>
+
+
+
+<p>
+
+{{ review.comment }}
+
+</p>
+
+
+
+<small>
+
+{{ review.created_at|date:"d M Y" }}
+
+</small>
+
+
+
+</div>
+
+
+
+
+{% empty %}
+
+
+<p class="text-muted">
+
+No reviews yet.
+
+</p>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+<!-- BUTTONS -->
+
+
+<div class="room-buttons">
+
+
+
+<a href="{% url 'book_room' room.id %}"
+class="book-btn">
+
+
+📅 Book Now
+
+
+</a>
+
+
+
+
+
+{% if room.id in wishlist_room_ids %}
+
+
+
+<a href="{% url 'remove_from_wishlist' room.id %}"
+class="wishlist-btn saved">
+
+
+❤️ Saved
+
+
+</a>
+
+
+
+{% else %}
+
+
+
+<a href="{% url 'add_to_wishlist' room.id %}"
+class="wishlist-btn">
+
+
+🤍 Wishlist
+
+
+</a>
+
+
+
+{% endif %}
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+{% empty %}
+
+
+
+<div class="col-12 text-center">
+
+
+<h4>
+No rooms available.
+</h4>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,870 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Analytics & Reports | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_reports.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="analytics-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ===================================================== -->
+
+    <div class="analytics-header">
+
+        <div>
+
+            <div class="analytics-breadcrumb">
+                ADMIN DASHBOARD / ANALYTICS & REPORTS
+            </div>
+
+            <h1>
+                Analytics <span>&</span> Reports
+            </h1>
+
+            <p>
+                Monitor hotel performance, bookings, revenue and room activity.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="analytics-back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         OVERVIEW CARDS
+    ===================================================== -->
+
+    <div class="analytics-summary-grid">
+
+
+        <!-- TOTAL BOOKINGS -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-card-icon">
+
+                <i class="bi bi-calendar-check"></i>
+
+            </div>
+
+            <div class="analytics-card-content">
+
+                <span>Total Bookings</span>
+
+                <strong>
+                    {{ total_bookings }}
+                </strong>
+
+                <small>
+                    All recorded bookings
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REVENUE -->
+
+        <div class="analytics-card revenue-card">
+
+            <div class="analytics-card-icon">
+
+                <i class="bi bi-currency-rupee"></i>
+
+            </div>
+
+            <div class="analytics-card-content">
+
+                <span>Paid Revenue</span>
+
+                <strong>
+                    ₹{{ total_revenue|floatformat:0 }}
+                </strong>
+
+                <small>
+                    Successfully paid
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- USERS -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-card-icon">
+
+                <i class="bi bi-people"></i>
+
+            </div>
+
+            <div class="analytics-card-content">
+
+                <span>Total Users</span>
+
+                <strong>
+                    {{ total_users }}
+                </strong>
+
+                <small>
+                    Registered users
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ROOMS -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-card-icon">
+
+                <i class="bi bi-buildings"></i>
+
+            </div>
+
+            <div class="analytics-card-content">
+
+                <span>Total Rooms</span>
+
+                <strong>
+                    {{ total_rooms }}
+                </strong>
+
+                <small>
+                    Hotel inventory
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BOOKING STATUS + PERFORMANCE
+    ===================================================== -->
+
+    <div class="analytics-two-column">
+
+
+        <!-- BOOKING STATUS -->
+
+        <div class="analytics-panel">
+
+            <div class="analytics-panel-header">
+
+                <div>
+
+                    <h2>
+                        Booking Performance
+                    </h2>
+
+                    <p>
+                        Current booking status breakdown
+                    </p>
+
+                </div>
+
+                <div class="analytics-panel-icon">
+
+                    <i class="bi bi-bar-chart-line"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="booking-status-list">
+
+
+                <!-- PENDING -->
+
+                <div class="status-item">
+
+                    <div class="status-heading">
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong>
+                            {{ pending_bookings }}
+                        </strong>
+
+                    </div>
+
+                    <div class="status-track">
+
+                        <div
+                            class="status-progress pending-progress"
+                            style="width:
+                            {% if total_bookings %}
+                                {% widthratio pending_bookings total_bookings 100 %}
+                            {% else %}
+                                0
+                            {% endif %}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRMED -->
+
+                <div class="status-item">
+
+                    <div class="status-heading">
+
+                        <span>
+                            Confirmed
+                        </span>
+
+                        <strong>
+                            {{ confirmed_bookings }}
+                        </strong>
+
+                    </div>
+
+                    <div class="status-track">
+
+                        <div
+                            class="status-progress confirmed-progress"
+                            style="width:
+                            {% if total_bookings %}
+                                {% widthratio confirmed_bookings total_bookings 100 %}
+                            {% else %}
+                                0
+                            {% endif %}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMPLETED -->
+
+                <div class="status-item">
+
+                    <div class="status-heading">
+
+                        <span>
+                            Completed
+                        </span>
+
+                        <strong>
+                            {{ completed_bookings }}
+                        </strong>
+
+                    </div>
+
+                    <div class="status-track">
+
+                        <div
+                            class="status-progress completed-progress"
+                            style="width:
+                            {% if total_bookings %}
+                                {% widthratio completed_bookings total_bookings 100 %}
+                            {% else %}
+                                0
+                            {% endif %}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CANCELLED -->
+
+                <div class="status-item">
+
+                    <div class="status-heading">
+
+                        <span>
+                            Cancelled
+                        </span>
+
+                        <strong>
+                            {{ cancelled_bookings }}
+                        </strong>
+
+                    </div>
+
+                    <div class="status-track">
+
+                        <div
+                            class="status-progress cancelled-progress"
+                            style="width:
+                            {% if total_bookings %}
+                                {% widthratio cancelled_bookings total_bookings 100 %}
+                            {% else %}
+                                0
+                            {% endif %}%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PERFORMANCE -->
+
+        <div class="analytics-panel">
+
+            <div class="analytics-panel-header">
+
+                <div>
+
+                    <h2>
+                        Key Performance
+                    </h2>
+
+                    <p>
+                        Important operational indicators
+                    </p>
+
+                </div>
+
+                <div class="analytics-panel-icon">
+
+                    <i class="bi bi-speedometer2"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="performance-list">
+
+
+                <!-- COMPLETION -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                    <div class="performance-info">
+
+                        <span>
+                            Completion Rate
+                        </span>
+
+                        <small>
+                            Completed bookings
+                        </small>
+
+                    </div>
+
+                    <strong>
+                        {{ completion_rate }}%
+                    </strong>
+
+                </div>
+
+
+
+                <!-- CANCELLATION -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="bi bi-x-circle"></i>
+
+                    </div>
+
+                    <div class="performance-info">
+
+                        <span>
+                            Cancellation Rate
+                        </span>
+
+                        <small>
+                            Cancelled bookings
+                        </small>
+
+                    </div>
+
+                    <strong>
+                        {{ cancellation_rate }}%
+                    </strong>
+
+                </div>
+
+
+
+                <!-- AVAILABILITY -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="bi bi-door-open"></i>
+
+                    </div>
+
+                    <div class="performance-info">
+
+                        <span>
+                            Room Availability
+                        </span>
+
+                        <small>
+                            Currently available
+                        </small>
+
+                    </div>
+
+                    <strong>
+                        {{ availability_rate }}%
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MONTHLY BOOKINGS
+    ===================================================== -->
+
+    <div class="analytics-panel monthly-panel">
+
+        <div class="analytics-panel-header">
+
+            <div>
+
+                <h2>
+                    Monthly Booking Analytics
+                </h2>
+
+                <p>
+                    Booking activity recorded by month
+                </p>
+
+            </div>
+
+            <div class="analytics-panel-icon">
+
+                <i class="bi bi-graph-up-arrow"></i>
+
+            </div>
+
+        </div>
+
+
+        {% if monthly_bookings %}
+
+        <div class="monthly-chart">
+
+
+            {% for item in monthly_bookings %}
+
+            <div class="month-row">
+
+
+                <div class="month-label">
+
+                    {{ item.month|date:"M Y" }}
+
+                </div>
+
+
+                <div class="month-bar-container">
+
+                    <div
+                        class="month-bar"
+                        style="width:
+                        {% if total_bookings %}
+                            {% widthratio item.bookings total_bookings 100 %}
+                        {% else %}
+                            0
+                        {% endif %}%;">
+                    </div>
+
+                </div>
+
+
+                <div class="month-value">
+
+                    {{ item.bookings }}
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+        {% else %}
+
+        <div class="analytics-empty">
+
+            <i class="bi bi-bar-chart"></i>
+
+            <p>
+                No monthly booking data available yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ROOM TYPE ANALYTICS
+    ===================================================== -->
+
+    <div class="analytics-panel">
+
+        <div class="analytics-panel-header">
+
+            <div>
+
+                <h2>
+                    Room Type Performance
+                </h2>
+
+                <p>
+                    Booking activity across different room categories
+                </p>
+
+            </div>
+
+            <div class="analytics-panel-icon">
+
+                <i class="bi bi-door-open"></i>
+
+            </div>
+
+        </div>
+
+
+        {% if room_type_analytics %}
+
+        <div class="analytics-table-wrapper">
+
+            <table class="analytics-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Room Type
+                        </th>
+
+                        <th>
+                            Bookings
+                        </th>
+
+                        <th>
+                            Booking Value
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for room in room_type_analytics %}
+
+                    <tr>
+
+                        <td>
+
+                            <div class="room-type-name">
+
+                                <div class="room-type-icon">
+
+                                    <i class="bi bi-building"></i>
+
+                                </div>
+
+                                {{ room.room__room_type }}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="booking-count">
+
+                                {{ room.bookings }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="room-revenue">
+
+                                ₹{{ room.revenue|floatformat:0 }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="analytics-empty">
+
+            <i class="bi bi-door-closed"></i>
+
+            <p>
+                No room booking data available yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ROOM INVENTORY
+    ===================================================== -->
+
+    <div class="analytics-inventory-grid">
+
+
+        <div class="inventory-card">
+
+            <div class="inventory-icon">
+
+                <i class="bi bi-buildings"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Total Rooms
+                </span>
+
+                <strong>
+                    {{ total_rooms }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="inventory-card">
+
+            <div class="inventory-icon">
+
+                <i class="bi bi-door-open"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Available Rooms
+                </span>
+
+                <strong>
+                    {{ available_rooms }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="inventory-card">
+
+            <div class="inventory-icon">
+
+                <i class="bi bi-door-closed"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Unavailable Rooms
+                </span>
+
+                <strong>
+                    {{ unavailable_rooms }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="inventory-card">
+
+            <div class="inventory-icon">
+
+                <i class="bi bi-clock-history"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Pending Bookings
+                </span>
+
+                <strong>
+                    {{ pending_bookings }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TOP ROOM TYPE
+    ===================================================== -->
+
+    {% if top_room_type %}
+
+    <div class="top-room-card">
+
+        <div class="top-room-icon">
+
+            <i class="bi bi-trophy"></i>
+
+        </div>
+
+
+        <div class="top-room-content">
+
+            <span>
+                MOST BOOKED ROOM TYPE
+            </span>
+
+            <h3>
+                {{ top_room_type.room__room_type }}
+            </h3>
+
+            <p>
+                {{ top_room_type.bookings }}
+                booking{{ top_room_type.bookings|pluralize }}
+                recorded for this room category.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         BACK BUTTON
+    ===================================================== -->
+
+    <div class="analytics-footer">
+
+        <a href="{% url 'admin_dashboard' %}">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Admin Dashboard
+
+        </a>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

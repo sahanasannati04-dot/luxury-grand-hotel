@@ -1,0 +1,438 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Gallery
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="gallery-section">
+
+
+<div class="container">
+
+
+<!-- PAGE TITLE -->
+
+<div class="gallery-title">
+
+    <h1>Hotel Gallery</h1>
+
+    <p>
+          Experience every corner of {{ hotel_settings.hotel_name }}.
+    </p>
+
+</div>
+
+
+
+<!-- =========================
+        HOTEL LOBBY
+========================= -->
+
+
+<div class="gallery-hero mb-5">
+
+    <img src="{% static 'images/gallery/lobby.jpg' %}"
+         alt="Luxury Hotel Lobby"
+         class="img-fluid">
+
+</div>
+
+
+
+
+<!-- =========================
+        LUXURY ROOMS
+========================= -->
+
+
+<h2 class="gallery-heading">
+    Luxury Rooms
+</h2>
+
+
+<div class="row g-4 mb-5">
+
+
+<div class="col-lg-4 col-md-6">
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/deluxe-room.jpg' %}"
+     alt="Deluxe Room"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Deluxe Room
+</h4>
+
+<p>
+Elegant comfort for every guest.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6">
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/luxury-suite.jpg' %}"
+     alt="Luxury Suite"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Luxury Suite
+</h4>
+
+<p>
+Modern luxury with premium facilities.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="col-lg-4 col-md-6">
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/presidential-suite.jpg' %}"
+     alt="Presidential Suite"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Presidential Suite
+</h4>
+
+<p>
+A royal experience with elegance.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+        INFINITY POOL
+========================= -->
+
+
+<h2 class="gallery-heading">
+    Infinity Pool
+</h2>
+
+
+
+<div class="gallery-hero mb-5">
+
+
+<img src="{% static 'images/gallery/infinity-pool.jpg' %}"
+     alt="Infinity Pool"
+     class="img-fluid">
+
+
+</div>
+
+
+<!-- =========================
+        FINE DINING
+========================= -->
+
+
+<h2 class="gallery-heading">
+    Fine Dining
+</h2>
+
+
+
+<div class="row g-4 mb-5">
+
+
+<div class="col-lg-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/restaurant.jpg' %}"
+     alt="Luxury Restaurant"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Fine Dining Restaurant
+</h4>
+
+<p>
+International cuisine and premium dining.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<div class="col-lg-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/lounge.jpg' %}"
+     alt="Luxury Lounge"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Luxury Lounge
+</h4>
+
+<p>
+Relax and enjoy your evening.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+        SPA & WELLNESS
+========================= -->
+
+
+<h2 class="gallery-heading">
+    Spa & Wellness
+</h2>
+
+
+
+<div class="row g-4 mb-5">
+
+
+<div class="col-lg-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/spa.jpg' %}"
+     alt="Luxury Spa"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Luxury Spa
+</h4>
+
+<p>
+Complete relaxation and wellness.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<div class="col-lg-4 col-md-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/jacuzzi.jpg' %}"
+     alt="Jacuzzi"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Jacuzzi Experience
+</h4>
+
+<p>
+Refresh your body and mind.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- =========================
+        ROOFTOP & EXTERIOR
+========================= -->
+
+
+<h2 class="gallery-heading">
+    Rooftop & Exterior
+</h2>
+
+
+
+<div class="row g-4 mb-5">
+
+
+
+<div class="col-lg-4 col-md-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/rooftop.jpg' %}"
+     alt="Hotel Rooftop"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Rooftop View
+</h4>
+
+<p>
+Beautiful city skyline experience.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<div class="col-lg-4 col-md-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/garden.jpg' %}"
+     alt="Hotel Garden"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Garden Area
+</h4>
+
+<p>
+Peaceful outdoor atmosphere.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<div class="col-lg-4 col-md-6">
+
+
+<div class="gallery-card">
+
+
+<img src="{% static 'images/gallery/entrance.jpg' %}"
+     alt="Hotel Entrance"
+     class="img-fluid">
+
+
+<div class="gallery-overlay">
+
+<h4>
+Grand Entrance
+</h4>
+
+<p>
+Welcome to {{ hotel_settings.hotel_name }}.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+{% endblock %}

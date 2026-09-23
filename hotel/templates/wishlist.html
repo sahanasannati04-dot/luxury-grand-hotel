@@ -1,0 +1,585 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Wishlist{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--==================================================
+                HERO SECTION
+===================================================-->
+
+<section class="wishlist-hero">
+
+    <div class="container">
+
+        <div class="wishlist-hero-content text-center">
+
+            <span class="hero-badge">
+
+                <i class="bi bi-heart-fill"></i>
+
+                Luxury Guest Collection
+
+            </span>
+
+            <h1>
+
+                My Wishlist
+
+            </h1>
+
+            <div class="gold-divider">
+
+                <span></span>
+
+                <i class="bi bi-stars"></i>
+
+                <span></span>
+
+            </div>
+
+            <p>
+
+                Save your favorite luxury rooms and suites in one place.
+                Compare, plan, and book your perfect stay at {{ hotel_settings.hotel_name }}.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--==================================================
+            SUMMARY SECTION
+===================================================-->
+
+<section class="wishlist-summary">
+
+<div class="container">
+
+<div class="row g-4">
+
+<!-- Total Wishlist -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-heart-fill"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Total Wishlist</h6>
+
+<h2>{{ wishlist_items|length }}</h2>
+
+<div class="summary-line"></div>
+
+<p>Your saved luxury rooms</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Available Rooms -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-door-open-fill"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Available Rooms</h6>
+
+<h2>{{ wishlist_items|length }}</h2>
+
+<div class="summary-line"></div>
+
+<p>Ready for booking</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Luxury Suites -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-gem"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Luxury Suites</h6>
+
+<h2>Premium</h2>
+
+<div class="summary-line"></div>
+
+<p>Exclusive collection</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Best Price -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-currency-rupee"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Best Value</h6>
+
+<h2>Luxury</h2>
+
+<div class="summary-line"></div>
+
+<p>Premium experience</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--==================================================
+            WISHLIST SECTION
+===================================================-->
+
+<section class="wishlist-section">
+
+<div class="container">
+
+<div class="wishlist-header">
+
+<div>
+
+<h2>
+
+<i class="bi bi-heart-fill"></i>
+
+My Favorite Rooms
+
+</h2>
+
+<p>
+
+Your carefully selected luxury accommodations.
+
+</p>
+
+</div>
+
+<span class="wishlist-count">
+
+{{ wishlist_items|length }} Rooms
+
+</span>
+
+</div>
+
+{% if wishlist_items %}
+
+<div class="wishlist-glass">
+
+    <div class="row g-4">
+
+        {% for item in wishlist_items %}
+
+<div class="col-xl-4 col-lg-6">
+
+<div class="wishlist-card">
+
+    <!-- Room Image -->
+
+    <div class="wishlist-image">
+
+        <img src="{{ item.room.image.url }}"
+             alt="{{ item.room.room_type }}">
+
+        <div class="image-overlay"></div>
+
+        <span class="wishlist-badge">
+
+            <i class="bi bi-gem"></i>
+
+            {{ item.room.room_type }}
+
+        </span>
+
+        <a href="{% url 'remove_from_wishlist' item.room.id %}"
+           class="wishlist-remove">
+
+            <i class="bi bi-heart-fill"></i>
+
+        </a>
+
+        <div class="room-rating">
+
+            <i class="bi bi-star-fill"></i>
+            4.9
+
+        </div>
+
+    </div>
+
+    <!-- Card Content -->
+
+    <div class="wishlist-content">
+
+        <h3>
+
+            {{ item.room.room_type }}
+
+            <span class="room-number">
+
+                Room {{ item.room.room_number }}
+
+            </span>
+
+        </h3>
+
+        <p>
+
+            {{ item.room.description|truncatewords:18 }}
+
+        </p>
+
+        <!-- Amenities -->
+
+        <div class="amenities">
+
+            <span>
+
+                <i class="bi bi-wifi"></i>
+
+                Free WiFi
+
+            </span>
+
+            <span>
+
+                <i class="bi bi-cup-hot"></i>
+
+                Breakfast
+
+            </span>
+
+            <span>
+
+                <i class="bi bi-snow"></i>
+
+                AC
+
+            </span>
+
+            <span>
+
+                <i class="bi bi-tv"></i>
+
+                Smart TV
+
+            </span>
+
+        </div>
+
+        <!-- Room Info -->
+
+        <div class="room-info-grid">
+
+            <div>
+
+                <i class="bi bi-people-fill"></i>
+
+                <span>
+
+                    2 Guests
+
+                </span>
+
+            </div>
+
+            <div>
+
+                <i class="bi bi-door-open-fill"></i>
+
+                <span>
+
+                    Luxury Suite
+
+                </span>
+
+            </div>
+
+            <div>
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                <span class="available">
+
+                    Available
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Price -->
+
+        <div class="price-section">
+
+            <div>
+
+                <small>
+
+                    Starting From
+
+                </small>
+
+                <h2>
+
+                    ₹{{ item.room.price }}
+
+                </h2>
+
+            </div>
+
+            <span>
+
+                / Night
+
+            </span>
+
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="wishlist-buttons">
+
+            <a href="{% url 'book_room' item.room.id %}"
+
+               class="book-btn">
+
+                <i class="bi bi-calendar-check-fill"></i>
+
+                Book Now
+
+            </a>
+
+            <a href="{% url 'book_room' item.room.id %}"
+                class="view-btn">
+
+                <i class="bi bi-eye-fill"></i>
+
+                Details
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+{% else %}
+
+<!--==================================================
+                EMPTY WISHLIST
+===================================================-->
+
+<div class="empty-wishlist">
+
+    <div class="empty-icon">
+
+        <i class="bi bi-heartbreak"></i>
+
+    </div>
+
+    <h2>
+
+        Your Wishlist is Empty
+
+    </h2>
+
+    <div class="gold-divider">
+
+        <span></span>
+
+        <i class="bi bi-stars"></i>
+
+        <span></span>
+
+    </div>
+
+    <p>
+
+        You haven't added any rooms to your wishlist yet.
+        Explore our premium collection and save your favourite
+        luxury rooms for your next unforgettable stay.
+
+    </p>
+
+    <a href="{% url 'rooms' %}"
+
+       class="browse-btn">
+
+        <i class="bi bi-search"></i>
+
+        Explore Luxury Rooms
+
+    </a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</section>
+
+<!--==================================================
+                PREMIUM CTA
+===================================================-->
+
+<section class="wishlist-cta">
+
+<div class="container">
+
+<div class="cta-box">
+
+<div class="row align-items-center">
+
+<!-- Left -->
+
+<div class="col-lg-3 text-center">
+
+<div class="cta-icon">
+
+<i class="bi bi-gem"></i>
+
+</div>
+
+</div>
+
+<!-- Center -->
+
+<div class="col-lg-6">
+
+<h2>
+
+Ready For Your Dream Stay?
+
+</h2>
+
+<div class="gold-divider left-divider">
+
+<span></span>
+
+<i class="bi bi-stars"></i>
+
+<span></span>
+
+</div>
+
+<p>
+
+Turn your wishlist into unforgettable memories.
+Reserve your favourite luxury suite and experience
+world-class hospitality at {{ hotel_settings.hotel_name }}.
+
+</p>
+
+</div>
+
+<!-- Right -->
+
+<div class="col-lg-3">
+
+<div class="cta-buttons">
+
+<a href="{% url 'rooms' %}"
+
+class="cta-btn">
+
+<i class="bi bi-building"></i>
+
+Book Now
+
+</a>
+
+<a href="{% url 'contact' %}"
+
+class="cta-btn-outline">
+
+<i class="bi bi-headset"></i>
+
+Contact Us
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

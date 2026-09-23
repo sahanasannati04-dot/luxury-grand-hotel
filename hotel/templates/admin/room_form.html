@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ page_title }} | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/admin_rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="room-form-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="room-form-header">
+
+        <div>
+
+            <div class="room-breadcrumb">
+                ADMIN DASHBOARD / ROOM MANAGEMENT
+            </div>
+
+            <h1>{{ page_title }}</h1>
+
+            <p>
+                {% if room %}
+                    Update the details of Room {{ room.room_number }}.
+                {% else %}
+                    Add a new room to Luxury Grand Hotel.
+                {% endif %}
+            </p>
+
+        </div>
+
+        <a href="{% url 'admin_rooms' %}"
+           class="back-rooms-btn">
+            ← Room Management
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         FORM CARD
+         ===================================================== -->
+
+    <div class="room-form-card">
+
+        <div class="form-card-heading">
+
+            <div class="form-heading-icon">
+                🏨
+            </div>
+
+            <div>
+
+                <h2>
+                    {% if room %}
+                        Room Information
+                    {% else %}
+                        New Room Details
+                    {% endif %}
+                </h2>
+
+                <p>
+                    Enter the room information below.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             DJANGO FORM
+             ================================================= -->
+
+        <form method="POST"
+              enctype="multipart/form-data"
+              class="premium-room-form">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="form-error-box">
+
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =============================================
+                 ROOM NUMBER
+                 ============================================= -->
+
+            <div class="form-group">
+
+                <label for="{{ form.room_number.id_for_label }}">
+                    Room Number
+                </label>
+
+                {{ form.room_number }}
+
+                {% if form.room_number.errors %}
+
+                    <div class="field-error">
+
+                        {% for error in form.room_number.errors %}
+                            {{ error }}
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =============================================
+                 ROOM TYPE
+                 ============================================= -->
+
+            <div class="form-group">
+
+                <label for="{{ form.room_type.id_for_label }}">
+                    Room Type
+                </label>
+
+                {{ form.room_type }}
+
+                {% if form.room_type.errors %}
+
+                    <div class="field-error">
+
+                        {% for error in form.room_type.errors %}
+                            {{ error }}
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =============================================
+                 PRICE
+                 ============================================= -->
+
+            <div class="form-group">
+
+                <label for="{{ form.price.id_for_label }}">
+                    Price Per Night
+                </label>
+
+                <div class="price-input-wrapper">
+
+                    <span>₹</span>
+
+                    {{ form.price }}
+
+                </div>
+
+                {% if form.price.errors %}
+
+                    <div class="field-error">
+
+                        {% for error in form.price.errors %}
+                            {{ error }}
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =============================================
+                 DESCRIPTION
+                 ============================================= -->
+
+            <div class="form-group full-width">
+
+                <label for="{{ form.description.id_for_label }}">
+                    Room Description
+                </label>
+
+                {{ form.description }}
+
+                {% if form.description.errors %}
+
+                    <div class="field-error">
+
+                        {% for error in form.description.errors %}
+                            {{ error }}
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =============================================
+                 IMAGE
+                 ============================================= -->
+
+            <div class="form-group full-width">
+
+                <label for="{{ form.image.id_for_label }}">
+                    Room Image
+                </label>
+
+                <div class="image-upload-box">
+
+                    {% if room and room.image %}
+
+                        <div class="current-room-image">
+
+                            <img
+                                src="{{ room.image.url }}"
+                                alt="Room {{ room.room_number }}"
+                            >
+
+                            <div>
+
+                                <strong>
+                                    Current Room Image
+                                </strong>
+
+                                <span>
+                                    Upload a new image to replace it.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                    {{ form.image }}
+
+                </div>
+
+                {% if form.image.errors %}
+
+                    <div class="field-error">
+
+                        {% for error in form.image.errors %}
+                            {{ error }}
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =============================================
+                 AVAILABILITY
+                 ============================================= -->
+
+            <div class="availability-box">
+
+                <div class="availability-content">
+
+                    <div class="availability-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Room Availability
+                        </strong>
+
+                        <span>
+                            Allow guests to book this room.
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <label class="premium-switch">
+
+                    {{ form.available }}
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+
+            {% if form.available.errors %}
+
+                <div class="field-error">
+
+                    {% for error in form.available.errors %}
+                        {{ error }}
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 ACTIONS
+                 ================================================= -->
+
+            <div class="room-form-actions">
+
+                <a href="{% url 'admin_rooms' %}"
+                   class="cancel-form-btn">
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="save-room-btn">
+
+                    <span>✓</span>
+                    {{ form_action }}
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

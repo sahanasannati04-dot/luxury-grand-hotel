@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Notifications | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_settings.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="settings-page">
+
+    <div class="settings-header">
+
+        <div>
+
+            <h1>Notifications</h1>
+
+            <p>
+                Control how Luxury Grand Hotel handles administrative notifications.
+            </p>
+
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="back-dashboard">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="settings-message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="settings-card">
+
+        <div class="settings-card-header">
+
+            <div class="settings-icon">
+                🔔
+            </div>
+
+            <div>
+
+                <h2>Notification Preferences</h2>
+
+                <p>
+                    Choose which events should generate administrative notifications.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="preference-row">
+
+                <div class="preference-info">
+
+                    <strong>
+                        New Booking
+                    </strong>
+
+                    <span>
+                        Receive notifications when a new reservation is created.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        name="booking_notifications"
+                        {% if booking_notifications %}checked{% endif %}>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="preference-row">
+
+                <div class="preference-info">
+
+                    <strong>
+                        Payment Updates
+                    </strong>
+
+                    <span>
+                        Receive notifications when payment status changes.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        name="payment_notifications"
+                        {% if payment_notifications %}checked{% endif %}>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="preference-row">
+
+                <div class="preference-info">
+
+                    <strong>
+                        Booking Cancellation
+                    </strong>
+
+                    <span>
+                        Receive notifications when reservations are cancelled.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        name="cancellation_notifications"
+                        {% if cancellation_notifications %}checked{% endif %}>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="preference-row">
+
+                <div class="preference-info">
+
+                    <strong>
+                        Email Notifications
+                    </strong>
+
+                    <span>
+                        Enable administrative email notifications.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        name="email_notifications"
+                        {% if email_notifications %}checked{% endif %}>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="settings-actions">
+
+                <button
+                    type="submit"
+                    class="save-settings">
+
+                    Save Preferences
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

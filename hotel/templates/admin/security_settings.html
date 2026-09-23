@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Security | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_settings.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="settings-page">
+
+    <div class="settings-header">
+
+        <div>
+
+            <h1>Security</h1>
+
+            <p>
+                Protect your Luxury Grand Hotel administration account.
+            </p>
+
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="back-dashboard">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="settings-message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="settings-card">
+
+        <div class="settings-card-header">
+
+            <div class="settings-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <h2>Change Administrator Password</h2>
+
+                <p>
+                    Keep your administrator account protected with a strong password.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="POST"
+              class="settings-form">
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label>
+                    Current Password
+                </label>
+
+                <input
+                    type="password"
+                    name="current_password"
+                    placeholder="Enter current password"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="new_password"
+                    placeholder="Minimum 8 characters"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="confirm_password"
+                    placeholder="Repeat new password"
+                    required>
+
+            </div>
+
+
+            <div class="settings-actions">
+
+                <button
+                    type="submit"
+                    class="save-settings">
+
+                    Update Password
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,298 @@
+<!-- Floating Chat Button -->
+<div id="chat-toggle">
+
+    <div class="chat-notification"></div>
+
+    🤖
+
+</div>
+
+
+<!-- Chat Window -->
+<div id="chat-container">
+
+
+    <!-- Header -->
+    <div class="chat-header">
+
+
+        <div class="chat-header-left">
+
+
+            <div class="bot-avatar">
+                🤖
+            </div>
+
+
+            <div>
+
+                <h5>
+                    AI Concierge
+                </h5>
+
+
+                <small>
+
+                    <span class="online-dot"></span>
+
+                    Online
+
+                </small>
+
+
+                <!-- =====================================
+                     Part 39 - Step 7.10
+                     AI Memory Indicator
+                ====================================== -->
+
+                <div class="memory-status">
+
+                    🧠 Memory Active
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <button id="close-chat">
+
+            ✕
+
+        </button>
+
+
+    </div>
+
+
+
+
+    <!-- Chat Messages -->
+    <div id="chat-body">
+
+
+        <div class="bot-message welcome-message">
+
+
+            <div class="message-header">
+
+
+                <span class="avatar">
+                    🤖
+                </span>
+
+
+
+                <div>
+
+                    <strong>
+                        AI Concierge
+                    </strong>
+
+                    <br>
+
+
+                    <small>
+                        Luxury Grand Hotel
+                    </small>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="message-content">
+
+
+                👋 Welcome to 
+                <strong>
+                    Luxury Grand Hotel
+                </strong>!
+
+
+                <br><br>
+
+
+                I'm your personal AI Concierge.
+
+
+                <br><br>
+
+
+                I can help you with:
+
+
+                <br><br>
+
+
+                🏨 Room Booking
+
+                <br>
+
+
+                💰 Prices
+
+                <br>
+
+
+                📅 Reservations
+
+                <br>
+
+
+                ⭐ Reviews
+
+                <br>
+
+
+                ❤️ Wishlist
+
+                <br>
+
+
+                💳 Payments
+
+                <br>
+
+
+                📍 Hotel Information
+
+
+                <br><br>
+
+
+                Ask me anything!
+
+
+            </div>
+
+
+
+
+            <div class="message-time"></div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- Suggested Questions -->
+    <div class="quick-actions">
+
+
+        <button 
+            class="quick-btn"
+            data-message="Show available rooms">
+
+            🛏️ Rooms
+
+        </button>
+
+
+
+        <button 
+            class="quick-btn"
+            data-message="Show room prices">
+
+            💰 Prices
+
+        </button>
+
+
+
+
+        <button 
+            class="quick-btn"
+            data-message="Where is the hotel located?">
+
+            📍 Location
+
+        </button>
+
+
+
+
+        <button 
+            class="quick-btn"
+            data-message="Hotel contact information">
+
+            📞 Contact
+
+        </button>
+
+
+
+    </div>
+
+
+
+
+
+
+    <!-- Typing Indicator -->
+    <div id="typing-indicator" style="display:none;">
+
+
+        <div class="typing-bubble">
+
+
+            🤖 AI Concierge is typing
+
+
+            <span class="dot"></span>
+
+            <span class="dot"></span>
+
+            <span class="dot"></span>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <!-- Input -->
+    <div class="chat-input">
+
+
+        <input
+
+            type="text"
+
+            id="user-message"
+
+            placeholder="Message AI Concierge...">
+
+
+        <button id="send-message">
+
+            ➤
+
+        </button>
+
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 auth-page register-card">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12">
+
+            <div class="card shadow auth-card">
+
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">
+
+                        Create Account
+
+                    </h2>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button class="btn btn-primary w-100">
+
+                            Register
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

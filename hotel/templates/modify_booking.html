@@ -1,0 +1,144 @@
+<!-- filepath: c:\Users\VISHAL\Downloads\hotel booking system\hotel_booking\hotel\templates\modify_booking.html -->
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Modify Booking{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/modify_booking.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="modify-page">
+
+    <div class="modify-container">
+
+        <header class="modify-header">
+            <span class="modify-label">
+                <i class="fas fa-calendar-check"></i>
+                RESERVATION MANAGEMENT
+            </span>
+
+            <h1>Modify Your Booking</h1>
+
+            <p>
+                Update your check-in date, check-out date, or number of guests.
+            </p>
+        </header>
+
+        <section class="booking-info">
+            <div>
+                <span>Reservation ID</span>
+                <strong>#PGH-{{ booking.id|stringformat:"05d" }}</strong>
+            </div>
+
+            <div>
+                <span>Room</span>
+                <strong>{{ booking.room.room_type }}</strong>
+            </div>
+
+            <div>
+                <span>Room Number</span>
+                <strong>{{ booking.room.room_number }}</strong>
+            </div>
+
+            <div>
+                <span>Status</span>
+                <strong>{{ booking.status }}</strong>
+            </div>
+        </section>
+
+        <section class="modify-content">
+
+            <div class="section-title">
+                <i class="fas fa-pen-to-square"></i>
+                <div>
+                    <h2>Update Reservation</h2>
+                    <p>Change your booking details below.</p>
+                </div>
+            </div>
+
+            <form method="post" class="modify-form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-error">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="{{ form.check_in.id_for_label }}">
+                            Check-in Date
+                        </label>
+
+                        {{ form.check_in }}
+
+                        {% for error in form.check_in.errors %}
+                            <small class="error-message">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.check_out.id_for_label }}">
+                            Check-out Date
+                        </label>
+
+                        {{ form.check_out }}
+
+                        {% for error in form.check_out.errors %}
+                            <small class="error-message">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <div class="form-group guests-field">
+                    <label for="{{ form.guests.id_for_label }}">
+                        Number of Guests
+                    </label>
+
+                    {{ form.guests }}
+
+                    {% for error in form.guests.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="price-summary">
+                    <span>Current Booking Total</span>
+                    <strong>₹{{ booking.total_price }}</strong>
+                </div>
+
+                <div class="modify-actions">
+                    <a href="{% url 'booking_details' booking.id %}">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Booking
+                    </a>
+
+                    <button type="submit">
+                        Save Changes
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+        <footer class="modify-footer">
+            <i class="fas fa-lock"></i>
+            Secure reservation management
+        </footer>
+
+    </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+User Management | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/admin_rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="room-management-page">
+
+    <!-- HEADER -->
+
+    <div class="room-page-header">
+
+        <div>
+
+            <div class="room-breadcrumb">
+                ADMIN DASHBOARD / USERS
+            </div>
+
+            <h1>User Management</h1>
+
+            <p>
+                Manage registered users and administrator accounts.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="room-summary-grid">
+
+        <div class="room-summary-card">
+
+            <div class="summary-icon">
+                👥
+            </div>
+
+            <div>
+                <span>Total Users</span>
+                <strong>{{ total_users }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="room-summary-card available-card">
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+                <span>Active Users</span>
+                <strong>{{ active_users }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="room-summary-card">
+
+            <div class="summary-icon">
+                👤
+            </div>
+
+            <div>
+                <span>Customers</span>
+                <strong>{{ normal_users }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="room-summary-card">
+
+            <div class="summary-icon">
+                ♛
+            </div>
+
+            <div>
+                <span>Administrators</span>
+                <strong>{{ staff_users }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="room-filter-panel">
+
+        <form method="GET"
+              class="room-filter-form">
+
+            <div class="filter-field search-field">
+
+                <label for="user-search">
+                    Search Users
+                </label>
+
+                <div class="search-wrapper">
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        id="user-search"
+                        name="search"
+                        value="{{ search }}"
+                        placeholder="Search username, name or email..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-actions">
+
+                <button type="submit"
+                        class="filter-btn">
+                    Search
+                </button>
+
+                <a href="{% url 'admin_users' %}"
+                   class="clear-filter-btn">
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- USERS TABLE -->
+
+    <div class="room-table-panel">
+
+        <div class="table-header">
+
+            <div>
+
+                <h2>Registered Users</h2>
+
+                <p>
+                    {{ users|length }}
+                    user{{ users|length|pluralize }}
+                    displayed
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if users %}
+
+        <div class="room-table-wrapper">
+
+            <table class="room-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>User</th>
+
+                        <th>Email</th>
+
+                        <th>Role</th>
+
+                        <th>Status</th>
+
+                        <th>Joined</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for user in users %}
+
+                    <tr>
+
+                        <!-- USER -->
+
+                        <td>
+
+                            <div class="room-info">
+
+                                <div class="room-thumbnail no-image">
+                                    {{ user.username|first|upper }}
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        {{ user.get_full_name|default:user.username }}
+                                    </strong>
+
+                                    <span>
+                                        @{{ user.username }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- EMAIL -->
+
+                        <td>
+
+                            {% if user.email %}
+
+                                <span style="color: rgba(255,255,255,.62);">
+                                    {{ user.email }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="no-description">
+                                    No email
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- ROLE -->
+
+                        <td>
+
+                            {% if user.is_superuser %}
+
+                                <span class="room-type-badge">
+                                    Super Admin
+                                </span>
+
+                            {% elif user.is_staff %}
+
+                                <span class="room-type-badge">
+                                    Admin
+                                </span>
+
+                            {% else %}
+
+                                <span class="room-type-badge">
+                                    Customer
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if user.is_active %}
+
+                                <span class="status-badge status-available">
+                                    <span class="status-dot"></span>
+                                    Active
+                                </span>
+
+                            {% else %}
+
+                                <span class="status-badge status-unavailable">
+                                    <span class="status-dot"></span>
+                                    Inactive
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- JOINED -->
+
+                        <td>
+
+                            <span style="color: rgba(255,255,255,.50); font-size: 11px;">
+                                {{ user.date_joined|date:"d M Y" }}
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="rooms-empty-state">
+
+            <div class="empty-icon">
+                👥
+            </div>
+
+            <h3>
+                No Users Found
+            </h3>
+
+            <p>
+                No users match your search.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <div class="back-dashboard">
+
+        <a href="{% url 'admin_dashboard' %}">
+            ← Back to Admin Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

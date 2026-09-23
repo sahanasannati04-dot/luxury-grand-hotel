@@ -1,0 +1,688 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block body_class %}about-page{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+            PREMIUM ABOUT HERO
+========================================== -->
+
+<section class="about-hero">
+
+    <div class="hero-bg-circle hero-circle-1"></div>
+    <div class="hero-bg-circle hero-circle-2"></div>
+
+    <div class="container">
+
+        <div class="about-hero-content text-center">
+
+            <span class="hero-tag">
+                Luxury Hospitality
+            </span>
+
+            <h1>
+                About Luxury Grand Hotel
+            </h1>
+
+            <p>
+                Experience timeless elegance, exceptional hospitality,
+                and unforgettable stays crafted with luxury, comfort,
+                and personalized service at every moment.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'rooms' %}" class="premium-btn">
+                    Explore Rooms
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            OUR STORY
+========================================== -->
+
+<section class="about-story">
+
+    <div class="container">
+
+        <div class="row align-items-start g-4">
+
+            <div class="col-lg-6">
+
+                <div class="section-heading">
+
+                    <span>OUR STORY</span>
+
+                    <h2>
+                        Timeless Elegance,
+                        Thoughtful Details
+                    </h2>
+
+                </div>
+
+                <p class="story-text">
+
+                    We combine contemporary architecture with genuine
+                    hospitality to create memorable experiences for every
+                    guest. From luxurious rooms to personalized services,
+                    every detail is designed for comfort and elegance.
+
+                </p>
+
+                <div class="story-features">
+
+                    <div class="story-item">
+                        ✓ Spacious luxury suites & signature rooms
+                    </div>
+
+                    <div class="story-item">
+                        ✓ Award-winning dining experiences
+                    </div>
+
+                    <div class="story-item">
+                        ✓ Rooftop infinity pool & wellness spa
+                    </div>
+
+                    <div class="story-item">
+                        ✓ 24/7 premium concierge service
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="story-image">
+                    <div class="story-images">
+                        <img src="{% static 'images/gallery/rooftop.jpg' %}"
+                             class="img-fluid"
+                             alt="Luxury Hotel">
+
+                        <img src="{% static 'images/gallery/lobby.jpg' %}"
+                             class="img-fluid"
+                             alt="Luxury Hotel 2">
+
+                        <img src="{% static 'images/gallery/restaurant.jpg' %}"
+                             class="img-fluid"
+                             alt="Fine Dining">
+
+                        <img src="{% static 'images/gallery/infinity-pool.jpg' %}"
+                             class="img-fluid"
+                             alt="Infinity Pool">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Removed duplicate LUXURY STATISTICS (kept the later hotel-stats section) -->
+<!-- ==========================================
+            WHY CHOOSE US
+========================================== -->
+
+<section class="why-us">
+
+    <div class="container">
+
+        <div class="section-heading text-center mb-5">
+
+            <span>WHY CHOOSE US</span>
+
+            <h2>
+                Experience Luxury Beyond Expectations
+            </h2>
+
+            <p>
+                Every stay is thoughtfully designed to provide exceptional
+                comfort, world-class hospitality, and unforgettable memories.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+
+            <div class="col-lg-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        ✨
+                    </div>
+
+                    <h4>
+                        Personalized Service
+                    </h4>
+
+                    <p>
+                        Our dedicated team ensures every guest receives
+                        personalized attention from arrival to departure.
+                    </p>
+
+                    <a href="#" class="why-link">
+                        Learn More →
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Card 2 -->
+
+            <div class="col-lg-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🍽
+                    </div>
+
+                    <h4>
+                        Fine Dining
+                    </h4>
+
+                    <p>
+                        Enjoy gourmet cuisine prepared by award-winning chefs
+                        using the finest locally sourced ingredients.
+                    </p>
+
+                    <a href="#" class="why-link">
+                        Learn More →
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Card 3 -->
+
+            <div class="col-lg-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🏨
+                    </div>
+
+                    <h4>
+                        Luxury Suites
+                    </h4>
+
+                    <p>
+                        Relax in spacious suites featuring premium interiors,
+                        panoramic views, and exceptional comfort.
+                    </p>
+
+                    <a href="#" class="why-link">
+                        Learn More →
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Card 4 -->
+
+            <div class="col-lg-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        🏊
+                    </div>
+
+                    <h4>
+                        Infinity Pool
+                    </h4>
+
+                    <p>
+                        Unwind beside our rooftop infinity pool while enjoying
+                        breathtaking city views and luxury amenities.
+                    </p>
+
+                    <a href="#" class="why-link">
+                        Learn More →
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Card 5 -->
+
+            <div class="col-lg-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        💆
+                    </div>
+
+                    <h4>
+                        Spa & Wellness
+                    </h4>
+
+                    <p>
+                        Rejuvenate your body and mind with our exclusive spa,
+                        wellness treatments, and fitness center.
+                    </p>
+
+                    <a href="#" class="why-link">
+                        Learn More →
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Card 6 -->
+
+            <div class="col-lg-4">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        📍
+                    </div>
+
+                    <h4>
+                        Prime Location
+                    </h4>
+
+                    <p>
+                        Located in the heart of Kalaburagi with convenient
+                        access to business hubs and tourist attractions.
+                    </p>
+
+                    <a href="#" class="why-link">
+                        Learn More →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--==================================================
+                LUXURY EXPERIENCE
+===================================================-->
+
+<section class="about-experience">
+
+    <div class="container">
+
+        <div class="section-heading text-center mb-5">
+
+            <span>EXPERIENCE LUXURY</span>
+
+            <h2>
+                Every Stay Is A Story Worth Remembering
+            </h2>
+
+            <p>
+                Discover premium comfort, exceptional hospitality, and
+                unforgettable experiences designed to make every moment
+                special at Luxury Grand Hotel.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="experience-card">
+
+                    <div class="experience-icon">
+                        🏨
+                    </div>
+
+                    <h4>Luxury Rooms</h4>
+
+                    <p>
+
+                        Elegant interiors with modern amenities,
+                        premium bedding and breathtaking comfort.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Card 2 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="experience-card">
+
+                    <div class="experience-icon">
+                        🍽️
+                    </div>
+
+                    <h4>Fine Dining</h4>
+
+                    <p>
+
+                        Experience gourmet cuisine prepared by
+                        internationally inspired chefs.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Card 3 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="experience-card">
+
+                    <div class="experience-icon">
+                        🏊
+                    </div>
+
+                    <h4>Infinity Pool</h4>
+
+                    <p>
+
+                        Relax beside our rooftop infinity pool
+                        while enjoying spectacular city views.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Card 4 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="experience-card">
+
+                    <div class="experience-icon">
+                        💆
+                    </div>
+
+                    <h4>Spa & Wellness</h4>
+
+                    <p>
+
+                        Rejuvenate your body and mind with
+                        luxurious spa therapies and wellness services.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--==================================================
+                HOTEL ACHIEVEMENTS
+===================================================-->
+
+<section class="hotel-stats">
+
+    <div class="container">
+
+        <div class="row g-4 text-center">
+
+            <div class="col-lg-3 col-6">
+
+                <div class="stat-box">
+
+                    <h2>120+</h2>
+
+                    <p>Luxury Rooms</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="stat-box">
+
+                    <h2>18K+</h2>
+
+                    <p>Happy Guests</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="stat-box">
+
+                    <h2>15+</h2>
+
+                    <p>Years of Excellence</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="stat-box">
+
+                    <h2>4.9★</h2>
+
+                    <p>Guest Rating</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            AWARDS & TESTIMONIALS
+========================================== -->
+
+<section class="about-awards">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span>OUR ACHIEVEMENTS</span>
+
+            <h2>
+                Trusted By Thousands Of Guests
+            </h2>
+
+            <p>
+                Our commitment to luxury hospitality has earned us
+                recognition from guests around the world.
+            </p>
+
+        </div>
+
+        <div class="row g-4 mt-4">
+
+            <!-- Award -->
+
+            <div class="col-lg-4">
+
+                <div class="award-card">
+
+                    <div class="award-icon">
+                        🏆
+                    </div>
+
+                    <h4>
+                        Best Luxury Hotel
+                    </h4>
+
+                    <p>
+                        Awarded for exceptional hospitality,
+                        premium comfort and unforgettable guest experiences.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Award -->
+
+            <div class="col-lg-4">
+
+                <div class="award-card">
+
+                    <div class="award-icon">
+                        ⭐
+                    </div>
+
+                    <h4>
+                        4.9 Guest Rating
+                    </h4>
+
+                    <p>
+                        Thousands of satisfied guests recommend
+                        Luxury Grand Hotel for business and leisure.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Award -->
+
+            <div class="col-lg-4">
+
+                <div class="award-card">
+
+                    <div class="award-icon">
+                        💎
+                    </div>
+
+                    <h4>
+                        Premium Service
+                    </h4>
+
+                    <p>
+                        Personalized concierge, luxurious rooms,
+                        and exceptional customer care every day.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="testimonial-box mt-5">
+
+            <div class="quote">
+
+                ❝
+
+            </div>
+
+            <p>
+
+                Staying at Luxury Grand Hotel was an unforgettable
+                experience. The elegant rooms, delicious dining,
+                and exceptional hospitality exceeded all expectations.
+
+            </p>
+
+            <h5>
+
+                — Sarah Williams
+
+            </h5>
+
+            <span>
+
+                Frequent Guest
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            PREMIUM CTA
+========================================== -->
+
+<section class="about-cta">
+
+    <div class="container">
+
+        <div class="cta-box text-center">
+
+            <span>PREMIUM EXPERIENCE</span>
+
+            <h2>
+                Experience Luxury Like Never Before
+            </h2>
+
+            <p>
+                Discover elegant rooms, world-class hospitality,
+                fine dining, and unforgettable memories at
+                Luxury Grand Hotel. Book your stay today and
+                enjoy premium comfort with exceptional service.
+            </p>
+
+            <div class="mt-4">
+
+                <a href="{% url 'rooms' %}" class="premium-btn">
+                    Book Your Stay
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

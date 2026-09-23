@@ -1,0 +1,940 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Booking Details | {{ hotel_settings.hotel_name }}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/booking_details.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--==================================================
+                    HERO SECTION
+===================================================-->
+
+<section class="booking-details-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+
+        <div class="hero-content text-center">
+
+            <span class="premium-badge">
+
+                ★ Luxury Reservation ★
+
+            </span>
+
+            <h1>
+
+                Booking Details
+
+            </h1>
+
+            <div class="gold-divider"></div>
+
+            <p class="reservation-id">
+
+                Reservation
+
+                <span>
+
+                    #PGH-{{ booking.id|stringformat:"05d" }}
+
+                </span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--==================================================
+                SUMMARY CARDS
+===================================================-->
+
+<section class="booking-summary py-5">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fas fa-ticket"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h6>
+
+                            Booking ID
+
+                        </h6>
+
+                        <h3>
+
+                             #PGH-{{ booking.id|stringformat:"05d" }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fas fa-circle-check"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h6>
+
+                            Status
+
+                        </h6>
+
+                        <h3>
+
+                            {{ booking.status }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fas fa-users"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h6>
+
+                            Guests
+
+                        </h6>
+
+                        <h3>
+
+                            {{ booking.guests }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fas fa-wallet"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <h6>
+
+                            Total
+
+                        </h6>
+
+                        <h3>
+
+                            ₹{{ booking.total_price }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+        ROOM / RESERVATION / QR SECTION
+========================================== -->
+
+<section class="booking-main py-5">
+
+    <div class="container">
+
+        <!-- ROOM INFORMATION -->
+
+        <div class="room-card glass-card mb-5">
+
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-6">
+
+                    <div class="room-image-wrapper">
+
+                        {% if booking.room.image %}
+
+                        <img src="{{ booking.room.image.url }}"
+                             class="room-image"
+                             alt="{{ booking.room.room_type }}">
+
+                        {% else %}
+
+                        <img src="{% static 'images/default-room.jpg' %}"
+                             class="room-image"
+                             alt="Room">
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="room-details">
+
+                        <span class="room-category">
+
+                            Premium Accommodation
+
+                        </span>
+
+                        <h2>
+
+                            {{ booking.room.room_type }}
+
+                        </h2>
+
+                        <p class="room-description">
+
+                            {{ booking.room.description }}
+
+                        </p>
+
+                        <div class="room-features">
+
+                            <div class="feature-box">
+
+                                <i class="fas fa-door-open"></i>
+
+                                <div>
+
+                                    <h6>Room Number</h6>
+
+                                    <p>{{ booking.room.room_number }}</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="feature-box">
+
+                                <i class="fas fa-indian-rupee-sign"></i>
+
+                                <div>
+
+                                    <h6>Price / Night</h6>
+
+                                    <p>₹{{ booking.room.price }}</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="feature-box">
+
+                                <i class="fas fa-users"></i>
+
+                                <div>
+
+                                    <h6>Guests</h6>
+
+                                    <p>{{ booking.guests }}</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="feature-box">
+
+                                <i class="fas fa-circle-check"></i>
+
+                                <div>
+
+                                    <h6>Availability</h6>
+
+                                    <p class="text-success">
+
+                                        Available
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RESERVATION + QR -->
+
+        <div class="row g-4 align-items-stretch">
+
+            <!-- Reservation -->
+
+            <div class="col-lg-6 d-flex">
+
+                <div class="glass-card reservation-card w-100">
+
+                    <div class="card-heading">
+
+                        <i class="fas fa-calendar-days"></i>
+
+                        <h3>Reservation Details</h3>
+
+                    </div>
+
+                    <div class="details-grid">
+
+                        <div class="detail-item">
+
+                            <span class="label">Check In</span>
+
+                            <div class="value">
+
+                                {{ booking.check_in }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="label">Check Out</span>
+
+                            <div class="value">
+
+                                {{ booking.check_out }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="label">Guests</span>
+
+                            <div class="value">
+
+                                {{ booking.guests }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="label">Status</span>
+
+                            <div class="status-badge">
+
+                                {{ booking.status }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="label">
+
+                                Booking Date
+
+                            </span>
+
+                            <div class="value">
+
+                                {{ booking.booking_date }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="detail-item">
+
+                            <span class="label">
+
+                                Duration
+
+                            </span>
+
+                            <div class="value">
+
+                                {{ booking.check_in }}
+
+                                -
+
+                                {{ booking.check_out }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+                        <!-- QR CHECK-IN -->
+
+            <div class="col-lg-6 d-flex">
+
+                <div class="glass-card qr-card w-100">
+
+                    <div class="card-heading justify-content-center">
+
+                        <i class="fas fa-qrcode"></i>
+
+                        <h3>QR Check-In</h3>
+
+                    </div>
+
+
+                    <div class="hotel-logo">
+
+                        <i class="fas fa-hotel"></i>
+
+                    </div>
+
+
+                    <div class="qr-wrapper">
+
+                       <img src="{{ booking.qr_code.url }}"
+                            class="qr-image"
+                            alt="Booking QR Code">
+
+                    </div>
+
+
+                    <p class="qr-text">
+
+                        Scan this QR code during check-in
+                        for quick reservation verification.
+
+                    </p>
+
+
+                    <div class="reservation-number">
+
+                        Reservation ID:
+
+                        <strong>
+
+                             #PGH-{{ booking.id|stringformat:"05d" }}
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT + HOTEL INFORMATION -->
+
+        <div class="row g-4 mt-2 align-items-stretch">
+
+
+            <!-- PAYMENT SUMMARY -->
+
+
+            <div class="col-lg-6 d-flex">
+
+
+                <div class="glass-card payment-card w-100">
+
+
+                    <div class="card-heading">
+
+                        <i class="fas fa-wallet"></i>
+
+                        <h3>
+                            Payment Summary
+                        </h3>
+
+                    </div>
+
+
+
+                    <div class="payment-list">
+
+
+                        <div class="payment-row">
+
+                            <span>
+                                Room Price
+                            </span>
+
+                            <strong>
+                                ₹{{ booking.room.price }}
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="payment-row">
+
+                            <span>
+                                Guests
+                            </span>
+
+                            <strong>
+                                {{ booking.guests }}
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="payment-row">
+
+                            <span>
+                                Booking Status
+                            </span>
+
+                            <strong>
+                                {{ booking.status }}
+                            </strong>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div class="payment-total">
+
+
+                        <span>
+                            Total Amount
+                        </span>
+
+
+                        <strong>
+
+                            ₹{{ booking.total_price }}
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- HOTEL INFORMATION -->
+
+
+            <div class="col-lg-6 d-flex">
+
+
+                <div class="glass-card hotel-card w-100">
+
+
+                    <div class="card-heading">
+
+                        <i class="fas fa-building"></i>
+
+                        <h3>
+                            Hotel Information
+                        </h3>
+
+                    </div>
+
+
+
+                    <div class="hotel-rating">
+
+                        ★★★★★
+
+                    </div>
+
+
+                    <h4>
+                        {{ hotel_settings.hotel_name }}
+                    </h4>
+
+
+
+                    <div class="hotel-info-list">
+
+
+                        <div class="hotel-info-item">
+
+
+                            <i class="fas fa-location-dot"></i>
+
+
+                            <span>
+
+                               {{ hotel_settings.hotel_address }}
+
+                            </span>
+
+
+                        </div>
+
+
+
+
+                        <div class="hotel-info-item">
+
+
+                            <i class="fas fa-phone"></i>
+
+
+                            <span>
+
+                                +{{ hotel_settings.hotel_phone }}
+
+
+                            </span>
+
+
+                        </div>
+
+
+
+
+                        <div class="hotel-info-item">
+
+
+                            <i class="fas fa-envelope"></i>
+
+
+                            <span>
+
+                                {{ hotel_settings.hotel_email }}
+
+                            </span>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+                <!-- ==========================================
+                RESERVATION TIMELINE
+        ========================================== -->
+
+
+        
+        <div class="glass-card timeline-card mt-5 mb-5">
+
+
+            <div class="card-heading">
+
+                <i class="fas fa-route"></i>
+
+                <h3>
+                    Reservation Timeline
+                </h3>
+
+            </div>
+
+
+
+            <div class="timeline">
+
+
+
+                <!-- BOOKING CREATED -->
+
+                <div class="timeline-item completed">
+
+
+                    <div class="timeline-icon">
+
+                        <i class="fas fa-file-circle-check"></i>
+
+                    </div>
+
+
+
+                    <div class="timeline-content">
+
+
+                        <h5>
+                            Booking Created
+                        </h5>
+
+
+                        <p>
+
+                            Your reservation has been successfully
+                            created.
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="timeline-line"></div>
+
+
+
+                <!-- PAYMENT -->
+
+                <div class="timeline-item completed">
+
+
+                    <div class="timeline-icon">
+
+                        <i class="fas fa-credit-card"></i>
+
+                    </div>
+
+
+
+                    <div class="timeline-content">
+
+
+                        <h5>
+                            Payment Confirmed
+                        </h5>
+
+
+                        <p>
+
+                            Your payment details have been
+                            verified successfully.
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="timeline-line"></div>
+
+
+
+                <!-- CHECK IN -->
+
+                <div class="timeline-item active">
+
+
+                    <div class="timeline-icon">
+
+
+                        <i class="fas fa-door-open"></i>
+
+
+                    </div>
+
+
+
+
+                    <div class="timeline-content">
+
+
+                        <h5>
+                            Hotel Check-In
+                        </h5>
+
+
+                        <p>
+
+                            Present your QR code at the reception
+                            for a smooth check-in experience.
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- ==========================================
+                ACTION BUTTONS
+        ========================================== -->
+
+
+        <div class="booking-actions mt-5">
+
+
+            <div class="row g-4">
+
+
+
+                <div class="col-lg-4">
+
+
+                    <a href="{% url 'booking_history' %}"
+                       class="btn-premium">
+
+
+                        <i class="fas fa-arrow-left"></i>
+
+
+                        Back to Bookings
+
+
+                    </a>
+
+
+                </div>
+
+
+
+
+                <div class="col-lg-4">
+
+                   <a href="{% url 'download_receipt' booking.id %}"
+                      class="btn-outline-premium">
+
+                      <i class="fas fa-download"></i>
+
+                       Download Receipt
+
+                    </a>
+
+                </div>
+
+
+
+
+                <div class="col-lg-4">
+
+                   <a href="{% url 'cancel_booking' booking.id %}"
+                      class="btn-danger-premium"
+                      onclick="return confirmCancelBooking();">
+               
+                       <i class="fas fa-ban"></i>
+
+                        Cancel Booking
+
+                    </a>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+</section>
+
+<script>
+
+function confirmCancelBooking() {
+
+    return confirm(
+        "Are you sure you want to cancel this booking?\n\n" +
+        "Reservation ID: #PGH-{{ booking.id|stringformat:'05d' }}\n" +
+        "Room: {{ booking.room.room_type }}\n\n" +
+        "Click OK to cancel the booking."
+    );
+
+}
+
+</script>
+
+{% endblock %}

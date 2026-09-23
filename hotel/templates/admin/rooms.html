@@ -1,0 +1,495 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Room Management | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/admin_rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="room-management-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="room-page-header">
+
+        <div>
+            <div class="room-breadcrumb">
+                ADMIN DASHBOARD / ROOMS
+            </div>
+
+            <h1>Room Management</h1>
+
+            <p>
+                Manage your hotel's rooms, availability and pricing.
+            </p>
+        </div>
+
+        <a href="{% url 'admin_room_add' %}"
+           class="add-room-btn">
+            <span>＋</span>
+            Add New Room
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+         ===================================================== -->
+
+    <div class="room-summary-grid">
+
+        <div class="room-summary-card">
+
+            <div class="summary-icon">
+                🏨
+            </div>
+
+            <div>
+                <span>Total Rooms</span>
+                <strong>{{ total_rooms }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="room-summary-card available-card">
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+                <span>Available</span>
+                <strong>{{ available_rooms }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="room-summary-card unavailable-card">
+
+            <div class="summary-icon">
+                ×
+            </div>
+
+            <div>
+                <span>Unavailable</span>
+                <strong>{{ unavailable_rooms }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="room-summary-card">
+
+            <div class="summary-icon">
+                ✦
+            </div>
+
+            <div>
+                <span>Room Types</span>
+                <strong>{{ room_types|length }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FILTER PANEL
+         ===================================================== -->
+
+    <div class="room-filter-panel">
+
+        <form method="GET"
+              class="room-filter-form">
+
+            <div class="filter-field search-field">
+
+                <label for="room-search">
+                    Search
+                </label>
+
+                <div class="search-wrapper">
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        id="room-search"
+                        name="search"
+                        value="{{ search }}"
+                        placeholder="Search room number or type..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="room-type">
+                    Room Type
+                </label>
+
+                <select
+                    id="room-type"
+                    name="room_type"
+                >
+
+                    <option value="">
+                        All Room Types
+                    </option>
+
+                    {% for type in room_types %}
+
+                        <option
+                            value="{{ type }}"
+                            {% if selected_room_type == type %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ type }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="availability">
+                    Availability
+                </label>
+
+                <select
+                    id="availability"
+                    name="availability"
+                >
+
+                    <option value="">
+                        All Rooms
+                    </option>
+
+                    <option
+                        value="available"
+                        {% if selected_availability == "available" %}
+                            selected
+                        {% endif %}
+                    >
+                        Available
+                    </option>
+
+                    <option
+                        value="unavailable"
+                        {% if selected_availability == "unavailable" %}
+                            selected
+                        {% endif %}
+                    >
+                        Unavailable
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-actions">
+
+                <button type="submit"
+                        class="filter-btn">
+                    Apply Filters
+                </button>
+
+                <a href="{% url 'admin_rooms' %}"
+                   class="clear-filter-btn">
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =====================================================
+         ROOM TABLE
+         ===================================================== -->
+
+    <div class="room-table-panel">
+
+        <div class="table-header">
+
+            <div>
+                <h2>Hotel Rooms</h2>
+
+                <p>
+                    {{ rooms|length }} room{{ rooms|length|pluralize }}
+                    displayed
+                </p>
+            </div>
+
+        </div>
+
+
+        {% if rooms %}
+
+        <div class="room-table-wrapper">
+
+            <table class="room-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Room</th>
+
+                        <th>Type</th>
+
+                        <th>Price / Night</th>
+
+                        <th>Status</th>
+
+                        <th>Description</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for room in rooms %}
+
+                    <tr>
+
+                        <!-- ROOM -->
+
+                        <td>
+
+                            <div class="room-info">
+
+                                {% if room.image %}
+
+                                <img
+                                    src="{{ room.image.url }}"
+                                    alt="Room {{ room.room_number }}"
+                                    class="room-thumbnail"
+                                >
+
+                                {% else %}
+
+                                <div class="room-thumbnail no-image">
+                                    🏨
+                                </div>
+
+                                {% endif %}
+
+
+                                <div>
+
+                                    <strong>
+                                        Room {{ room.room_number }}
+                                    </strong>
+
+                                    <span>
+                                        Luxury Grand Hotel
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- TYPE -->
+
+                        <td>
+
+                            <span class="room-type-badge">
+                                {{ room.room_type }}
+                            </span>
+
+                        </td>
+
+
+                        <!-- PRICE -->
+
+                        <td>
+
+                            <div class="room-price">
+                                ₹{{ room.price }}
+                            </div>
+
+                            <span class="price-label">
+                                per night
+                            </span>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if room.available %}
+
+                                <span class="status-badge status-available">
+                                    <span class="status-dot"></span>
+                                    Available
+                                </span>
+
+                            {% else %}
+
+                                <span class="status-badge status-unavailable">
+                                    <span class="status-dot"></span>
+                                    Unavailable
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <td>
+
+                            <div class="room-description">
+
+                                {% if room.description %}
+
+                                    {{ room.description|truncatechars:70 }}
+
+                                {% else %}
+
+                                    <span class="no-description">
+                                        No description added
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- ACTIONS -->
+
+                        <td>
+
+                            <div class="room-actions">
+
+                                <a
+                                    href="{% url 'admin_room_edit' room.id %}"
+                                    class="action-btn edit-btn"
+                                    title="Edit Room"
+                                >
+                                    ✎
+                                </a>
+
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'admin_room_delete' room.id %}"
+                                    class="delete-room-form"
+                                    onsubmit="return confirm(
+                                        'Are you sure you want to delete Room {{ room.room_number }}?'
+                                    );"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="action-btn delete-btn"
+                                        title="Delete Room"
+                                    >
+                                        🗑
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <!-- =================================================
+             EMPTY STATE
+             ================================================= -->
+
+        <div class="rooms-empty-state">
+
+            <div class="empty-icon">
+                🏨
+            </div>
+
+            <h3>
+                No Rooms Found
+            </h3>
+
+            <p>
+                No rooms match your current search or filter.
+            </p>
+
+            <a
+                href="{% url 'admin_room_add' %}"
+                class="add-room-btn"
+            >
+                ＋ Add New Room
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =====================================================
+         BACK TO DASHBOARD
+         ===================================================== -->
+
+    <div class="back-dashboard">
+
+        <a href="{% url 'admin_dashboard' %}">
+            ← Back to Admin Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

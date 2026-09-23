@@ -1,0 +1,635 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+My Booking History
+{% endblock %}
+
+{% block content %}
+
+<!-- =======================================================
+                    HERO
+======================================================= -->
+
+<section class="booking-hero">
+
+    <div class="container">
+
+        <div class="booking-hero-content text-center">
+
+            <span class="hero-badge">
+
+                <i class="bi bi-building-check"></i>
+
+                Luxury Guest Portal
+
+            </span>
+
+            <h1>
+
+                My Booking History
+
+            </h1>
+
+            <div class="gold-divider">
+
+                <span></span>
+
+                <i class="bi bi-stars"></i>
+
+                <span></span>
+
+            </div>
+
+            <p>
+
+                Manage your reservations, review previous stays,
+                and enjoy a seamless luxury experience with
+                {{ hotel_settings.hotel_name }}.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+                SUMMARY CARDS
+======================================================= -->
+
+<section class="booking-summary">
+
+<div class="container">
+
+<div class="row g-4">
+
+<!-- Total -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-calendar-check"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Total Bookings</h6>
+
+<h2>{{ total_bookings }}</h2>
+
+<div class="summary-line"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Upcoming -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-clock-history"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Upcoming</h6>
+
+<h2>{{ upcoming }}</h2>
+
+<div class="summary-line"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Completed -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-award"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Completed</h6>
+
+<h2>{{ completed }}</h2>
+
+<div class="summary-line"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Cancelled -->
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="bi bi-x-circle"></i>
+
+</div>
+
+<div class="summary-content">
+
+<h6>Cancelled</h6>
+
+<h2>{{ cancelled }}</h2>
+
+<div class="summary-line"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+                RESERVATIONS
+======================================================= -->
+
+<section class="booking-history-section">
+
+<div class="container">
+
+<div class="reservation-box">
+
+<div class="reservation-header">
+
+<h2>
+
+<i class="bi bi-calendar2-check"></i>
+
+My Reservations
+
+</h2>
+
+<span class="reservation-count">
+
+{{ bookings|length }} Reservations
+
+</span>
+
+</div>
+
+{% if bookings %}
+
+<div class="table-responsive">
+
+<table class="booking-table">
+
+<thead>
+
+<tr>
+
+<th>ROOM</th>
+
+<th>ROOM NO</th>
+
+<th>CHECK IN</th>
+
+<th>CHECK OUT</th>
+
+<th>GUESTS</th>
+
+<th>TOTAL PRICE</th>
+
+<th>STATUS</th>
+
+<th>ACTION</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for booking in bookings %}
+
+<tr>
+
+<!-- ROOM -->
+
+<td>
+
+<div class="room-info">
+
+<div class="room-details">
+
+<h5>
+
+{{ booking.room.room_type }}
+
+</h5>
+
+<span>
+
+Luxury Stay
+
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+<!-- ROOM NUMBER -->
+
+<td>
+
+<span class="room-number">
+
+{{ booking.room.room_number }}
+
+</span>
+
+</td>
+
+<!-- CHECK IN -->
+
+<td>
+
+<div class="table-icon">
+
+<i class="bi bi-calendar3"></i>
+
+{{ booking.check_in|date:"d M Y" }}
+
+</div>
+
+</td>
+
+<!-- CHECK OUT -->
+
+<td>
+
+<div class="table-icon">
+
+<i class="bi bi-calendar3"></i>
+
+{{ booking.check_out|date:"d M Y" }}
+
+</div>
+
+</td>
+
+<!-- GUESTS -->
+
+<td>
+
+<div class="table-icon">
+
+<i class="bi bi-person"></i>
+
+{{ booking.guests }}
+
+</div>
+
+</td>
+
+<!-- PRICE -->
+
+<td>
+
+<span class="price">
+
+₹{{ booking.total_price }}
+
+</span>
+
+</td>
+
+<!-- STATUS -->
+
+<td>
+
+{% if booking.status == "Confirmed" %}
+
+<span class="status confirmed">
+
+<i class="bi bi-check-circle-fill"></i>
+
+Confirmed
+
+</span>
+
+{% elif booking.status == "Pending" %}
+
+<span class="status pending">
+
+<i class="bi bi-hourglass-split"></i>
+
+Pending
+
+</span>
+
+{% elif booking.status == "Cancelled" %}
+
+<span class="status cancelled">
+
+<i class="bi bi-x-circle-fill"></i>
+
+Cancelled
+
+</span>
+
+{% else %}
+
+<span class="status completed">
+
+<i class="bi bi-award-fill"></i>
+
+Completed
+
+</span>
+
+{% endif %}
+
+</td>
+
+<!-- ACTION -->
+
+<td>
+
+    <div class="action-menu">
+
+        <button
+            class="action-toggle"
+            type="button"
+            aria-label="Booking actions">
+
+            <i class="bi bi-three-dots-vertical"></i>
+
+        </button>
+
+        <div class="action-dropdown">
+
+            <!-- VIEW DETAILS -->
+
+            <a href="{% url 'booking_details' booking.id %}">
+
+                <i class="bi bi-eye"></i>
+
+                <span>View Details</span>
+
+            </a>
+
+
+            <!-- DOWNLOAD INVOICE -->
+
+            <a href="{% url 'download_invoice' booking.id %}">
+
+                <i class="bi bi-file-earmark-arrow-down"></i>
+
+                <span>Download Invoice</span>
+
+            </a>
+
+
+            <!-- MODIFY BOOKING -->
+
+            <a href="{% url 'modify_booking' booking.id %}">
+
+                <i class="bi bi-pencil-square"></i>
+
+                <span>Modify Booking</span>
+
+            </a>
+
+
+            <!-- CONTACT HOTEL -->
+
+            <a href="{% url 'contact' %}">
+
+                <i class="bi bi-headset"></i>
+
+                <span>Contact Hotel</span>
+
+            </a>
+
+
+            <!-- CANCEL BOOKING -->
+
+            {% if booking.status == "Confirmed" %}
+
+            <hr>
+
+            <a
+                href="{% url 'cancel_booking' booking.id %}"
+                class="danger"
+                onclick="return confirm('Are you sure you want to cancel this booking?');">
+
+                <i class="bi bi-x-circle-fill"></i>
+
+                <span>Cancel Booking</span>
+
+            </a>
+
+            {% endif %}
+
+
+            <!-- DELETE BOOKING -->
+
+            {% if booking.status == "Cancelled" or booking.status == "Completed" %}
+
+            <hr>
+
+            <form
+                method="POST"
+                action="{% url 'delete_booking' booking.id %}"
+                class="delete-booking-form"
+                onsubmit="return confirm('Are you sure you want to permanently delete this booking? This action cannot be undone.');">
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="delete-booking-btn">
+
+                    <i class="bi bi-trash3"></i>
+
+                    <span>Delete Booking</span>
+
+                </button>
+
+            </form>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% else %}
+
+<div class="empty-bookings">
+
+<div class="empty-icon">
+
+<i class="bi bi-building"></i>
+
+</div>
+
+<h2>
+
+No Booking History Yet
+
+</h2>
+
+<p>
+
+You haven't made any reservations yet.
+Browse our premium rooms and book your
+perfect luxury stay today.
+
+</p>
+
+<a href="{% url 'rooms' %}"
+
+class="browse-btn">
+
+<i class="bi bi-search"></i>
+
+Browse Luxury Rooms
+
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ======================================================
+                PREMIUM CTA
+====================================================== -->
+
+<section class="booking-cta">
+
+<div class="container">
+
+<div class="cta-card">
+
+<div class="row align-items-center">
+
+<!-- Left Icon -->
+
+<div class="col-lg-3 text-center">
+
+<div class="cta-icon">
+
+<i class="bi bi-building"></i>
+
+</div>
+
+</div>
+
+<!-- Center Content -->
+
+<div class="col-lg-5">
+
+<h2>
+
+Ready For Your Next Stay?
+
+</h2>
+
+<div class="gold-divider left-divider">
+
+<span></span>
+
+<i class="bi bi-stars"></i>
+
+<span></span>
+
+</div>
+
+<p>
+
+Experience world-class hospitality,
+luxurious rooms, premium dining,
+wellness facilities and unforgettable
+memories with {{ hotel_settings.hotel_name }}.
+
+</p>
+
+</div>
+
+<!-- Right Buttons -->
+
+<div class="col-lg-4">
+
+    <div class="cta-buttons">
+
+        <a href="{% url 'rooms' %}" class="cta-btn">
+            <i class="bi bi-building"></i>
+            Explore Rooms
+        </a>
+
+        <a href="{% url 'contact' %}" class="contact-btn">
+            <i class="fas fa-headset"></i>
+            Contact Us
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,546 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Booking #{{ booking.id }} | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/admin_booking_details.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-booking-details-page">
+
+
+    <!-- HEADER -->
+
+    <section class="admin-details-header">
+
+        <div>
+
+            <div class="details-breadcrumb">
+                ADMIN DASHBOARD
+                <span>/</span>
+                BOOKINGS
+                <span>/</span>
+                #{{ booking.id }}
+            </div>
+
+            <h1>
+                Booking Details
+            </h1>
+
+            <p>
+                Complete reservation information and management controls.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'admin_bookings' %}"
+           class="details-back-btn">
+
+            ← All Bookings
+
+        </a>
+
+    </section>
+
+
+    <!-- BOOKING ID BAR -->
+
+    <section class="booking-identity-bar">
+
+        <div>
+
+            <span>
+                RESERVATION ID
+            </span>
+
+            <strong>
+                #{{ booking.id }}
+            </strong>
+
+        </div>
+
+
+        <div class="identity-status">
+
+            {% if booking.status == "Confirmed" %}
+
+                <span class="details-status confirmed">
+                    ● Confirmed
+                </span>
+
+            {% elif booking.status == "Completed" %}
+
+                <span class="details-status completed">
+                    ● Completed
+                </span>
+
+            {% elif booking.status == "Cancelled" %}
+
+                <span class="details-status cancelled">
+                    ● Cancelled
+                </span>
+
+            {% else %}
+
+                <span class="details-status pending">
+                    ● Pending
+                </span>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN GRID -->
+
+    <div class="booking-details-grid">
+
+
+        <!-- GUEST -->
+
+        <section class="details-card">
+
+            <div class="details-card-heading">
+
+                <div class="details-heading-icon">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Guest Information
+                    </h2>
+
+                    <p>
+                        Registered guest details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-list">
+
+                <div class="details-row">
+
+                    <span>
+                        Full Name
+                    </span>
+
+                    <strong>
+
+                        {% if booking.user.get_full_name %}
+                            {{ booking.user.get_full_name }}
+                        {% else %}
+                            {{ booking.user.username }}
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Username
+                    </span>
+
+                    <strong>
+                        @{{ booking.user.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        {{ booking.user.email|default:"Not provided" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROOM -->
+
+        <section class="details-card">
+
+            <div class="details-card-heading">
+
+                <div class="details-heading-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Room Information
+                    </h2>
+
+                    <p>
+                        Reserved accommodation
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-list">
+
+                <div class="details-row">
+
+                    <span>
+                        Room Number
+                    </span>
+
+                    <strong class="gold-text">
+                        {{ booking.room.room_number }}
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Room Type
+                    </span>
+
+                    <strong>
+                        {{ booking.room.room_type }}
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Room Price
+                    </span>
+
+                    <strong class="gold-text">
+                        ₹{{ booking.room.price }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STAY -->
+
+        <section class="details-card">
+
+            <div class="details-card-heading">
+
+                <div class="details-heading-icon">
+                    <i class="bi bi-calendar2-week"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Stay Information
+                    </h2>
+
+                    <p>
+                        Reservation dates
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-list">
+
+                <div class="details-row">
+
+                    <span>
+                        Check-in
+                    </span>
+
+                    <strong>
+                        {{ booking.check_in|date:"d M Y" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Check-out
+                    </span>
+
+                    <strong>
+                        {{ booking.check_out|date:"d M Y" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Number of Guests
+                    </span>
+
+                    <strong>
+                        {{ booking.guests }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAYMENT -->
+
+        <section class="details-card">
+
+            <div class="details-card-heading">
+
+                <div class="details-heading-icon">
+                    <i class="bi bi-credit-card"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Payment Information
+                    </h2>
+
+                    <p>
+                        Reservation payment status
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-list">
+
+                <div class="details-row">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong class="gold-text amount-large">
+                        ₹{{ booking.total_price }}
+                    </strong>
+
+                </div>
+
+
+                {% if payment %}
+
+                <div class="details-row">
+
+                    <span>
+                        Payment Status
+                    </span>
+
+                    <strong>
+                        {{ payment.status }}
+                    </strong>
+
+                </div>
+
+
+                <div class="details-row">
+
+                    <span>
+                        Razorpay Order
+                    </span>
+
+                    <strong class="small-value">
+                        {{ payment.razorpay_order_id|default:"Not available" }}
+                    </strong>
+
+                </div>
+
+                {% else %}
+
+                <div class="details-row">
+
+                    <span>
+                        Payment
+                    </span>
+
+                    <strong>
+                        No payment record
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- MANAGEMENT -->
+
+    <section class="management-card">
+
+        <div class="management-heading">
+
+            <div>
+
+                <div class="section-mini-label">
+                    ADMIN CONTROL
+                </div>
+
+                <h2>
+                    Manage Reservation
+                </h2>
+
+                <p>
+                    Update the current booking status.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="management-actions">
+
+
+            {% if booking.status == "Pending" %}
+
+            <form method="POST"
+                  action="{% url 'admin_booking_status' booking.id 'confirm' %}"
+                  onsubmit="return confirm('Confirm booking #{{ booking.id }}?');">
+
+                {% csrf_token %}
+
+                <button class="management-btn confirm-management"
+                        type="submit">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Confirm Booking
+
+                </button>
+
+            </form>
+
+            {% endif %}
+
+
+            {% if booking.status == "Confirmed" %}
+
+            <form method="POST"
+                  action="{% url 'admin_booking_status' booking.id 'complete' %}"
+                  onsubmit="return confirm('Mark booking #{{ booking.id }} as completed?');">
+
+                {% csrf_token %}
+
+                <button class="management-btn complete-management"
+                        type="submit">
+
+                    <i class="bi bi-stars"></i>
+
+                    Mark Completed
+
+                </button>
+
+            </form>
+
+            {% endif %}
+
+
+            {% if booking.status == "Pending" or booking.status == "Confirmed" %}
+
+            <form method="POST"
+                  action="{% url 'admin_booking_status' booking.id 'cancel' %}"
+                  onsubmit="return confirm('Cancel booking #{{ booking.id }}?');">
+
+                {% csrf_token %}
+
+                <button class="management-btn cancel-management"
+                        type="submit">
+
+                    <i class="bi bi-x-circle"></i>
+
+                    Cancel Booking
+
+                </button>
+
+            </form>
+
+            {% endif %}
+
+
+            {% if booking.status == "Completed" %}
+
+                <div class="final-status-message">
+                    <i class="bi bi-patch-check"></i>
+                    This reservation has been completed.
+                </div>
+
+            {% elif booking.status == "Cancelled" %}
+
+                <div class="final-status-message cancelled-message">
+                    <i class="bi bi-x-circle"></i>
+                    This reservation has been cancelled.
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+    <div class="details-footer">
+
+        <a href="{% url 'admin_bookings' %}">
+            <i class="bi bi-arrow-left"></i>
+            Back to Booking Management
+        </a>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

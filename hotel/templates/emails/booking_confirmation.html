@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+    margin:0;
+    padding:0;
+    background:#f2f4f6;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.wrapper{
+    width:100%;
+    padding:30px 0;
+}
+
+.container{
+    max-width:650px;
+    margin:auto;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+.header{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.header h1{
+    margin:0;
+}
+
+.success{
+    background:#d1e7dd;
+    color:#0f5132;
+    text-align:center;
+    padding:18px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.content{
+    padding:35px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:25px;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #ececec;
+}
+
+.label{
+    font-weight:bold;
+}
+
+.price{
+    color:#198754;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.button{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 28px;
+    background:#0d6efd;
+    color:white !important;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.footer{
+    background:#f8f9fa;
+    padding:20px;
+    text-align:center;
+    color:#777;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .content{
+        padding:20px;
+    }
+
+    td{
+        display:block;
+        width:100%;
+    }
+
+    .button{
+        display:block;
+        text-align:center;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="wrapper">
+
+<div class="container">
+
+
+<!-- HOTEL HEADER -->
+
+<div class="header">
+
+<h1>
+🏨 {{ hotel_settings.hotel_name }}
+</h1>
+
+<p>
+Your Luxury Stay Awaits
+</p>
+
+</div>
+
+
+<!-- SUCCESS MESSAGE -->
+
+<div class="success">
+
+✅ Your Booking has been Confirmed!
+
+</div>
+
+
+<!-- BOOKING CONTENT -->
+
+<div class="content">
+
+<h2>
+Hello {{ user.username }},
+</h2>
+
+
+<p>
+
+Thank you for booking with
+<strong>{{ hotel_settings.hotel_name }}</strong>.
+
+Your reservation has been successfully confirmed.
+
+</p>
+
+
+<!-- BOOKING DETAILS -->
+
+<table>
+
+<tr>
+
+<td class="label">
+Room Type
+</td>
+
+<td>
+{{ room.room_type }}
+</td>
+
+</tr>
+
+
+<tr>
+
+<td class="label">
+Check-in
+</td>
+
+<td>
+{{ booking.check_in }}
+</td>
+
+</tr>
+
+
+<tr>
+
+<td class="label">
+Check-out
+</td>
+
+<td>
+{{ booking.check_out }}
+</td>
+
+</tr>
+
+
+<tr>
+
+<td class="label">
+Total Amount
+</td>
+
+<td class="price">
+₹{{ booking.total_price }}
+</td>
+
+</tr>
+
+</table>
+
+
+<center>
+
+<a href="#" class="button">
+
+View My Bookings
+
+</a>
+
+</center>
+
+
+<br>
+<br>
+
+
+<!-- QR CODE -->
+
+<h3 style="text-align:center;">
+
+📱 Show this QR Code at Check-in
+
+</h3>
+
+
+<center>
+
+{% if booking.qr_code %}
+
+<img
+    src="cid:qrcode"
+    alt="Booking QR Code"
+    style="
+        width:220px;
+        border:8px solid #f8f9fa;
+        border-radius:12px;
+    "
+>
+
+{% endif %}
+
+</center>
+
+
+<p style="margin-top:35px;">
+
+We look forward to welcoming you and hope you enjoy your stay.
+
+</p>
+
+
+<!-- HOTEL CONTACT -->
+
+<p style="margin-top:25px;">
+
+<strong>{{ hotel_settings.hotel_name }}</strong>
+
+<br>
+
+{{ hotel_settings.hotel_address }}
+
+<br>
+
+{{ hotel_settings.hotel_phone }}
+
+<br>
+
+{{ hotel_settings.hotel_email }}
+
+</p>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+© 2026 {{ hotel_settings.hotel_name }}
+
+<br>
+<br>
+
+Thank you for choosing us ❤️
+
+</div>
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,596 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Secure Payment | Luxury Grand Hotel
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/payment.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="payment-page">
+
+    <div class="payment-container">
+
+        <!-- =====================================================
+             MAIN PAYMENT CARD
+        ====================================================== -->
+
+        <div class="payment-card">
+
+
+            <!-- =================================================
+                 PAYMENT HEADER
+            ================================================== -->
+
+            <header class="payment-header">
+
+                <div class="payment-lock">
+                    <span>🔒</span>
+                </div>
+
+                <h1>Secure Payment</h1>
+
+                <div class="payment-divider">
+                    <span></span>
+                    <i>✦</i>
+                    <span></span>
+                </div>
+
+                <p>
+                    Complete your reservation securely
+                    using Razorpay
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+                 BOOKING INFORMATION
+            ================================================== -->
+
+            <div class="booking-section">
+
+                <div class="section-heading">
+
+                    <span class="section-heading-icon">
+                        ✦
+                    </span>
+
+                    <div>
+                        <h2>Reservation Details</h2>
+
+                        <p>
+                            Review your booking before payment
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="booking-grid">
+
+
+                    <!-- Booking ID -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            🎟
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Reservation ID
+                            </span>
+
+                            <strong>
+                                #PGH-{{ booking.id|stringformat:"05d" }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Guest -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            👤
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Guest
+                            </span>
+
+                            <strong>
+                                {{ booking.user.username }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Room -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            🛏
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Room Type
+                            </span>
+
+                            <strong>
+                                {{ booking.room.room_type }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Room Number -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            🚪
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Room Number
+                            </span>
+
+                            <strong>
+                                {{ booking.room.room_number }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Guests -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            👥
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Guests
+                            </span>
+
+                            <strong>
+                                {{ booking.guests }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Check In -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            📅
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Check-in
+                            </span>
+
+                            <strong>
+                                {{ booking.check_in|date:"M d, Y" }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Check Out -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            📅
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Check-out
+                            </span>
+
+                            <strong>
+                                {{ booking.check_out|date:"M d, Y" }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status -->
+                    <div class="booking-item">
+
+                        <div class="booking-icon">
+                            ✓
+                        </div>
+
+                        <div class="booking-content">
+
+                            <span class="booking-label">
+                                Booking Status
+                            </span>
+
+                            <strong class="status-value">
+                                {{ booking.status }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PAYMENT SUMMARY
+            ================================================== -->
+
+            <div class="payment-summary">
+
+                <div class="summary-left">
+
+                    <div class="amount-icon">
+                        ₹
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Amount
+                        </span>
+
+                        <small>
+                            Inclusive of your reservation amount
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="amount-value">
+
+                    ₹{{ payment.amount|floatformat:2 }}
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RAZORPAY PAYMENT BUTTON
+            ================================================== -->
+
+            <button
+                id="pay-button"
+                class="pay-button"
+                type="button">
+
+                {% if debug %}
+                <form
+                    method="POST"
+                    action="{% url 'test_payment_success' booking.id %}"
+                    style="margin-top: 15px;">
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="pay-button"
+                        style="background: #198754;">
+
+                        🧪 Complete Test Payment
+
+                    </button>
+
+                </form>
+                {% endif %}
+
+                <span class="button-lock">
+                    🔒
+                </span>
+
+                <span class="button-text">
+                    Pay ₹{{ payment.amount|floatformat:2 }}
+                </span>
+
+                <span class="button-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- =================================================
+                 PAYMENT PROVIDER
+            ================================================== -->
+
+            <div class="payment-provider">
+
+                <div class="provider-line"></div>
+
+                <div class="provider-lock">
+                    🔒
+                </div>
+
+                <div class="provider-line"></div>
+
+                <p>
+                    Secure payment powered by
+                    <strong>Razorpay</strong>
+                </p>
+
+                <span>
+                    Your payment information is protected
+                    with industry-standard security.
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- =========================================================
+     RAZORPAY CHECKOUT
+========================================================= -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const payButton = document.getElementById("pay-button");
+
+    if (!payButton) {
+        console.error("Razorpay button not found.");
+        return;
+    }
+
+    console.log("Razorpay Pay button loaded successfully.");
+
+    payButton.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        console.log("Pay button clicked.");
+
+        if (typeof Razorpay === "undefined") {
+            alert(
+                "Razorpay Checkout could not be loaded. Please refresh the page."
+            );
+            return;
+        }
+
+        const originalHTML = payButton.innerHTML;
+
+        payButton.disabled = true;
+
+        payButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Opening Secure Payment...';
+
+        const options = {
+
+            key: "{{ razorpay_key_id }}",
+
+            amount: "{{ amount }}",
+
+            currency: "INR",
+
+            name: "Luxury Grand Hotel",
+
+            description: "Hotel Booking Payment",
+
+            order_id: "{{ razorpay_order_id }}",
+
+            prefill: {
+                name: "{{ booking.user.username|escapejs }}",
+                email: "{{ booking.user.email|escapejs }}"
+            },
+
+            theme: {
+                color: "#4c1d95"
+            },
+
+            handler: function (response) {
+
+                console.log(
+                    "Razorpay payment successful:",
+                    response
+                );
+
+                const form = document.createElement("form");
+
+                form.method = "POST";
+                form.action = "{% url 'payment_success' %}";
+
+                function addField(name, value) {
+
+                    const input = document.createElement("input");
+
+                    input.type = "hidden";
+                    input.name = name;
+                    input.value = value || "";
+
+                    form.appendChild(input);
+                }
+
+                addField(
+                    "razorpay_order_id",
+                    response.razorpay_order_id
+                );
+
+                addField(
+                    "razorpay_payment_id",
+                    response.razorpay_payment_id
+                );
+
+                addField(
+                    "razorpay_signature",
+                    response.razorpay_signature
+                );
+
+                addField(
+                    "csrfmiddlewaretoken",
+                    "{{ csrf_token }}"
+                );
+
+                document.body.appendChild(form);
+
+                form.submit();
+            },
+
+            modal: {
+
+                ondismiss: function () {
+
+                    console.log(
+                        "Razorpay Checkout closed."
+                    );
+
+                    payButton.disabled = false;
+
+                    payButton.innerHTML = originalHTML;
+                }
+            }
+        };
+
+        console.log(
+            "Opening Razorpay Checkout..."
+        );
+
+        const razorpay = new Razorpay(options);
+
+        razorpay.on(
+            "payment.failed",
+            function (response) {
+
+                console.error(
+                    "========== RAZORPAY PAYMENT FAILED =========="
+                );
+
+                console.error(
+                    "Full Response:",
+                    response
+                );
+
+                const error =
+                    response.error || {};
+
+                console.error(
+                    "Code:",
+                    error.code
+                );
+
+                console.error(
+                    "Description:",
+                    error.description
+                );
+
+                console.error(
+                    "Source:",
+                    error.source
+                );
+
+                console.error(
+                    "Step:",
+                    error.step
+                );
+
+                console.error(
+                    "Reason:",
+                    error.reason
+                );
+
+                console.error(
+                    "Order ID:",
+                    error.metadata?.order_id
+                );
+
+                console.error(
+                    "Payment ID:",
+                    error.metadata?.payment_id
+                );
+
+                console.error(
+                    "=============================================="
+                );
+
+                payButton.disabled = false;
+
+                payButton.innerHTML =
+                    originalHTML;
+
+                alert(
+                    "Razorpay Payment Failed\n\n" +
+
+                    "Code: " +
+                    (error.code || "N/A") +
+
+                    "\n\nDescription: " +
+                    (error.description || "N/A") +
+
+                    "\n\nSource: " +
+                    (error.source || "N/A") +
+
+                    "\n\nStep: " +
+                    (error.step || "N/A") +
+
+                    "\n\nReason: " +
+                    (error.reason || "N/A")
+                );
+            }
+        );
+
+        razorpay.open();
+
+    });
+
+});
+</script>
+
+{% endblock %}

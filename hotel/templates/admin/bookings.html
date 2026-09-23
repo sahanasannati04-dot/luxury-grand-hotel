@@ -1,0 +1,722 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Booking Management | Luxury Grand Hotel
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+    href="{% static 'css/admin_booking.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-bookings-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="booking-admin-header">
+
+        <div class="booking-header-content">
+
+            <div class="booking-breadcrumb">
+                ADMIN DASHBOARD
+                <span>/</span>
+                BOOKINGS
+            </div>
+
+            <h1>
+                Booking Management
+            </h1>
+
+            <p>
+                Monitor, review and manage all guest reservations.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="booking-dashboard-btn">
+
+            <span>←</span>
+            Dashboard
+
+        </a>
+
+    </section>
+
+
+    <!-- =====================================================
+         STATISTICS
+    ====================================================== -->
+
+    <section class="booking-stats-grid">
+
+
+        <div class="booking-stat-card">
+
+            <div class="booking-stat-icon">
+                <i class="bi bi-calendar2-check"></i>
+            </div>
+
+            <div class="booking-stat-content">
+
+                <span>Total Bookings</span>
+
+                <strong>
+                    {{ total_bookings }}
+                </strong>
+
+                <small>
+                    All reservations
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="booking-stat-card pending-stat">
+
+            <div class="booking-stat-icon">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+
+            <div class="booking-stat-content">
+
+                <span>Pending</span>
+
+                <strong>
+                    {{ pending_bookings }}
+                </strong>
+
+                <small>
+                    Awaiting confirmation
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="booking-stat-card confirmed-stat">
+
+            <div class="booking-stat-icon">
+                <i class="bi bi-check-circle"></i>
+            </div>
+
+            <div class="booking-stat-content">
+
+                <span>Confirmed</span>
+
+                <strong>
+                    {{ confirmed_bookings }}
+                </strong>
+
+                <small>
+                    Active reservations
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="booking-stat-card completed-stat">
+
+            <div class="booking-stat-icon">
+                <i class="bi bi-stars"></i>
+            </div>
+
+            <div class="booking-stat-content">
+
+                <span>Completed</span>
+
+                <strong>
+                    {{ completed_bookings }}
+                </strong>
+
+                <small>
+                    Finished stays
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="booking-stat-card cancelled-stat">
+
+            <div class="booking-stat-icon">
+                <i class="bi bi-x-circle"></i>
+            </div>
+
+            <div class="booking-stat-content">
+
+                <span>Cancelled</span>
+
+                <strong>
+                    {{ cancelled_bookings }}
+                </strong>
+
+                <small>
+                    Cancelled reservations
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTER PANEL
+    ====================================================== -->
+
+    <section class="booking-filter-card">
+
+        <div class="filter-heading">
+
+            <div class="filter-heading-icon">
+                <i class="bi bi-funnel"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Reservation Search
+                </h2>
+
+                <p>
+                    Search guests or filter reservations by status.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="GET"
+              class="booking-filter-form">
+
+
+            <div class="booking-search-field">
+
+                <label>
+                    Search Reservations
+                </label>
+
+                <div class="booking-input-wrapper">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ search }}"
+                        placeholder="Username, guest name or room number..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="booking-status-field">
+
+                <label>
+                    Booking Status
+                </label>
+
+                <select name="status">
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="Pending"
+                        {% if selected_status == "Pending" %}
+                            selected
+                        {% endif %}>
+                        Pending
+                    </option>
+
+                    <option value="Confirmed"
+                        {% if selected_status == "Confirmed" %}
+                            selected
+                        {% endif %}>
+                        Confirmed
+                    </option>
+
+                    <option value="Completed"
+                        {% if selected_status == "Completed" %}
+                            selected
+                        {% endif %}>
+                        Completed
+                    </option>
+
+                    <option value="Cancelled"
+                        {% if selected_status == "Cancelled" %}
+                            selected
+                        {% endif %}>
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="booking-filter-actions">
+
+                <button type="submit"
+                        class="booking-apply-btn">
+
+                    <i class="bi bi-funnel-fill"></i>
+                    Apply Filters
+
+                </button>
+
+
+                <a href="{% url 'admin_bookings' %}"
+                   class="booking-clear-btn">
+
+                    Clear
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- =====================================================
+         BOOKINGS TABLE
+    ====================================================== -->
+
+    <section class="booking-table-card">
+
+
+        <div class="booking-table-header">
+
+            <div>
+
+                <div class="section-mini-label">
+                    RESERVATION RECORDS
+                </div>
+
+                <h2>
+                    Guest Reservations
+                </h2>
+
+                <p>
+                    {{ bookings|length }}
+                    reservation{{ bookings|length|pluralize }}
+                    currently displayed
+                </p>
+
+            </div>
+
+
+            <div class="table-record-badge">
+
+                <i class="bi bi-database"></i>
+
+                Live Records
+
+            </div>
+
+        </div>
+
+
+        {% if bookings %}
+
+
+        <div class="booking-table-wrapper">
+
+            <table class="booking-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Reservation
+                        </th>
+
+                        <th>
+                            Guest
+                        </th>
+
+                        <th>
+                            Room
+                        </th>
+
+                        <th>
+                            Stay
+                        </th>
+
+                        <th>
+                            Guests
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for booking in bookings %}
+
+                    <tr>
+
+
+                        <!-- RESERVATION -->
+
+                        <td>
+
+                            <div class="reservation-cell">
+
+                                <strong>
+                                    #{{ booking.id }}
+                                </strong>
+
+                                <span>
+                                    {{ booking.booking_date|date:"d M Y" }}
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- GUEST -->
+
+                        <td>
+
+                            <div class="guest-cell">
+
+                                <div class="guest-avatar">
+
+                                    {{ booking.user.username|first|upper }}
+
+                                </div>
+
+
+                                <div class="guest-details">
+
+                                    <strong>
+                                        {% if booking.user.get_full_name %}
+                                            {{ booking.user.get_full_name }}
+                                        {% else %}
+                                            {{ booking.user.username }}
+                                        {% endif %}
+                                    </strong>
+
+                                    <span>
+                                        @{{ booking.user.username }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- ROOM -->
+
+                        <td>
+
+                            <div class="room-cell">
+
+                                <span class="room-number">
+                                    {{ booking.room.room_number }}
+                                </span>
+
+                                <span class="room-type">
+                                    {{ booking.room.room_type }}
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- STAY -->
+
+                        <td>
+
+                            <div class="stay-cell">
+
+                                <strong>
+                                    {{ booking.check_in|date:"d M Y" }}
+                                </strong>
+
+                                <span>
+                                    → {{ booking.check_out|date:"d M Y" }}
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- GUEST COUNT -->
+
+                        <td>
+
+                            <span class="guest-count">
+
+                                <i class="bi bi-people"></i>
+
+                                {{ booking.guests }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- TOTAL -->
+
+                        <td>
+
+                            <span class="booking-amount">
+                                ₹{{ booking.total_price }}
+                            </span>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if booking.status == "Confirmed" %}
+
+                                <span class="booking-status confirmed">
+
+                                    <span></span>
+
+                                    Confirmed
+
+                                </span>
+
+
+                            {% elif booking.status == "Completed" %}
+
+                                <span class="booking-status completed">
+
+                                    <span></span>
+
+                                    Completed
+
+                                </span>
+
+
+                            {% elif booking.status == "Cancelled" %}
+
+                                <span class="booking-status cancelled">
+
+                                    <span></span>
+
+                                    Cancelled
+
+                                </span>
+
+
+                            {% else %}
+
+                                <span class="booking-status pending">
+
+                                    <span></span>
+
+                                    Pending
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- ACTIONS -->
+
+                        <td>
+
+                            <div class="booking-actions">
+
+
+                                <!-- VIEW -->
+
+                                <a
+                                    href="{% url 'admin_booking_details' booking.id %}"
+                                    class="action-btn view-action"
+                                    title="View booking">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+
+                                <!-- CONFIRM -->
+
+                                {% if booking.status == "Pending" %}
+
+                                <form method="POST"
+                                      action="{% url 'admin_booking_status' booking.id 'confirm' %}"
+                                      onsubmit="return confirm('Confirm booking #{{ booking.id }}?');">
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="action-btn confirm-action"
+                                        title="Confirm booking">
+
+                                        <i class="bi bi-check-lg"></i>
+
+                                    </button>
+
+                                </form>
+
+                                {% endif %}
+
+
+                                <!-- COMPLETE -->
+
+                                {% if booking.status == "Confirmed" %}
+
+                                <form method="POST"
+                                      action="{% url 'admin_booking_status' booking.id 'complete' %}"
+                                      onsubmit="return confirm('Mark booking #{{ booking.id }} as completed?');">
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="action-btn complete-action"
+                                        title="Complete booking">
+
+                                        <i class="bi bi-stars"></i>
+
+                                    </button>
+
+                                </form>
+
+                                {% endif %}
+
+
+                                <!-- CANCEL -->
+
+                                {% if booking.status == "Pending" or booking.status == "Confirmed" %}
+
+                                <form method="POST"
+                                      action="{% url 'admin_booking_status' booking.id 'cancel' %}"
+                                      onsubmit="return confirm('Cancel booking #{{ booking.id }}?');">
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="action-btn cancel-action"
+                                        title="Cancel booking">
+
+                                        <i class="bi bi-x-lg"></i>
+
+                                    </button>
+
+                                </form>
+
+                                {% endif %}
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="booking-empty-state">
+
+            <div class="empty-booking-icon">
+
+                <i class="bi bi-calendar-x"></i>
+
+            </div>
+
+            <h3>
+                No Bookings Found
+            </h3>
+
+            <p>
+                No reservations match your current search or filter.
+            </p>
+
+            <a href="{% url 'admin_bookings' %}">
+                View All Bookings
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER NAVIGATION
+    ====================================================== -->
+
+    <div class="booking-bottom-navigation">
+
+        <a href="{% url 'admin_dashboard' %}">
+            <i class="bi bi-arrow-left"></i>
+            Back to Admin Dashboard
+        </a>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

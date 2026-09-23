@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+            <h3>⭐ Write a Review</h3>
+        </div>
+
+        <div class="card-body">
+
+            <h5 class="mb-4">
+                Room:
+                <strong>{{ booking.room.room_type }}</strong>
+                (Room {{ booking.room.room_number }})
+            </h5>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Rating
+                    </label>
+
+                    {{ form.rating }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Review
+                    </label>
+
+                    {{ form.comment }}
+                </div>
+
+                <button class="btn btn-success">
+                    Submit Review
+                </button>
+
+                <a href="{% url 'booking_history' %}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

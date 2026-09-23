@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+<!--=========================================
+                CONTACT HERO
+==========================================-->
+
+<section class="contact-hero">
+
+    <div class="container">
+
+        <div class="contact-hero-content">
+
+            <span class="hero-badge">
+                Luxury Hospitality
+            </span>
+
+            <h1>
+                Contact Luxury Grand Hotel
+            </h1>
+
+            <p>
+                We'd love to hear from you. Whether you're planning your stay,
+                making a reservation, or requesting personalized services,
+                our dedicated team is available 24/7 to assist you.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================================
+            CONTACT FEATURES
+==========================================-->
+
+<section class="contact-features">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🕒
+                    </div>
+
+                    <h4>24/7 Reception</h4>
+
+                    <p>
+                        Always available to welcome and assist our guests.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🚗
+                    </div>
+
+                    <h4>Free Parking</h4>
+
+                    <p>
+                        Complimentary secure parking throughout your stay.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🛎️
+                    </div>
+
+                    <h4>Concierge</h4>
+
+                    <p>
+                        Personalized assistance for a memorable experience.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📶
+                    </div>
+
+                    <h4>High-Speed WiFi</h4>
+
+                    <p>
+                        Stay connected anywhere inside the hotel.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================================
+            CONTACT SECTION
+==========================================-->
+
+<section class="contact-section">
+
+<div class="container">
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div class="alert alert-success shadow-sm mb-4">
+
+            {{ message }}
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+<div class="row g-5">
+
+    <!-- CONTACT FORM -->
+
+    <div class="col-lg-7">
+
+        <div class="contact-card">
+
+            <div class="section-heading">
+
+                <span>Get In Touch</span>
+
+                <h2>
+                    Send Us A Message
+                </h2>
+
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Your Name
+                    </label>
+
+                    {{ form.name }}
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Email Address
+                    </label>
+
+                    {{ form.email }}
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Message
+                    </label>
+
+                    {{ form.message }}
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="premium-btn w-100">
+
+                    Send Message
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- CONTACT INFORMATION -->
+
+    <div class="col-lg-5">
+
+        <div class="contact-card info-card">
+
+            <div class="section-heading">
+
+                <span>Hotel Information</span>
+
+                <h2>
+                    Reach Us
+                </h2>
+
+            </div>
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h5>Address</h5>
+
+                    <p>
+                       {{ hotel_settings.hotel_address }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    ☎
+                </div>
+
+                <div>
+
+                    <h5>Phone</h5>
+
+                    <p>
+
+                        {{ hotel_settings.hotel_phone }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    ✉
+                </div>
+
+                <div>
+
+                    <h5>Email</h5>
+
+                    <p>
+                       {{ hotel_settings.hotel_email }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    🕒
+                </div>
+
+                <div>
+
+                    <h5>Reception</h5>
+
+                    <p>
+
+                        Open 24 Hours
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <h5>Guest Rating</h5>
+
+                    <p>
+
+                        4.9 / 5 Luxury Experience
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=Sedam+Road+Kalaburagi+585105"
+                target="_blank"
+                class="premium-btn mt-4">
+
+                Get Directions
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--=========================================
+            LOCATION SECTION
+==========================================-->
+
+<section class="location-section">
+
+    <div class="container">
+
+        <div class="section-heading text-center mb-5">
+
+            <span>Find Us</span>
+
+            <h2>Our Location</h2>
+
+            <p>
+                Visit Luxury Grand Hotel in the heart of Kalaburagi.
+                We look forward to welcoming you.
+            </p>
+
+        </div>
+
+        <div class="map-card">
+
+            <iframe
+                src="https://www.google.com/maps?q=Sedam+Road+Kalaburagi+585105&output=embed"
+                width="100%"
+                height="500"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================================
+            CALL TO ACTION
+==========================================-->
+
+<section class="contact-cta">
+
+    <div class="container">
+
+        <div class="cta-card">
+
+            <span class="hero-badge">
+                Luxury Awaits
+            </span>
+
+            <h2>
+                Ready For An Unforgettable Stay?
+            </h2>
+
+            <p>
+                Discover elegant rooms, exceptional dining,
+                premium amenities, and world-class hospitality.
+            </p>
+
+            <a
+                href="{% url 'rooms' %}"
+                class="premium-btn">
+
+                Book Your Stay
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+</section>
+
+{% endblock %}

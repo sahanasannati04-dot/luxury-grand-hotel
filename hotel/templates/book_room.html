@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Book Room
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card glass-card shadow">
+
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">
+
+                        Book {{ room.room_type }}
+
+                    </h2>
+
+                    <h4 class="text-success">
+
+                        ₹{{ room.price }} / Night
+
+                    </h4>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button class="btn btn-success w-100">
+
+                            Confirm Booking
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

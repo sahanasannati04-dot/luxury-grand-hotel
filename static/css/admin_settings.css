@@ -1,0 +1,531 @@
+/* =========================================================
+   LUXURY GRAND HOTEL
+   ADMIN SETTINGS
+   PREMIUM GLASSMORPHISM
+   ========================================================= */
+
+.settings-page {
+
+    min-height: calc(100vh - 80px);
+
+    padding: 55px 6% 80px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.settings-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 35px;
+}
+
+
+.settings-header h1 {
+
+    margin: 0;
+
+    font-size: 32px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.5px;
+}
+
+
+.settings-header p {
+
+    margin: 8px 0 0;
+
+    color: rgba(255,255,255,0.55);
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   BACK TO DASHBOARD
+   ========================================================= */
+
+.back-dashboard {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 20px;
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    border-radius: 13px;
+
+    color: rgba(255,255,255,0.78);
+
+    text-decoration: none;
+
+    background: rgba(255,255,255,0.035);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04);
+
+    transition:
+        transform 0.28s ease,
+        background 0.28s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease,
+        color 0.28s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.back-dashboard:hover {
+
+    color: #ffffff;
+
+    background: #d4af37;
+
+    border-color: #d4af37;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(212, 175, 55, 0.35);
+
+}
+
+/* =========================================================
+   SETTINGS CARD
+   ========================================================= */
+
+.settings-card {
+
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.055),
+            rgba(255,255,255,0.018)
+        );
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+
+    backdrop-filter: blur(18px);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.settings-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+
+.settings-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    font-size: 25px;
+
+    background: rgba(212,175,55,0.09);
+
+    border: 1px solid rgba(212,175,55,0.20);
+}
+
+
+.settings-card-header h2 {
+
+    margin: 0;
+
+    font-size: 21px;
+
+    font-weight: 500;
+}
+
+
+.settings-card-header p {
+
+    margin: 5px 0 0;
+
+    color: rgba(255,255,255,0.48);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.settings-form {
+
+    display: grid;
+
+    gap: 22px;
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.form-group label {
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: rgba(255,255,255,0.72);
+}
+
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    outline: none;
+
+    color: #ffffff;
+
+    background: rgba(255,255,255,0.035);
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition: 0.25s ease;
+}
+
+
+.form-group textarea {
+
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color: rgba(212,175,55,0.65);
+
+    background: rgba(212,175,55,0.035);
+
+    box-shadow:
+        0 0 0 3px rgba(212,175,55,0.07);
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+
+    color: rgba(255,255,255,0.28);
+}
+
+
+/* =========================================================
+   TWO COLUMN FORM
+   ========================================================= */
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+.settings-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding-top: 10px;
+}
+
+
+.save-settings {
+
+    border: 1px solid rgba(212,175,55,0.45);
+
+    border-radius: 12px;
+
+    padding: 13px 25px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    background: rgba(212,175,55,0.10);
+
+    font-family: inherit;
+
+    font-weight: 500;
+
+    transition: 0.25s ease;
+}
+
+
+.save-settings:hover {
+
+    background: rgba(212,175,55,0.20);
+
+    border-color: rgba(212,175,55,0.75);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.25);
+}
+
+
+/* =========================================================
+   TOGGLE ROW
+   ========================================================= */
+
+.preference-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 19px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+
+.preference-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.preference-info strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.preference-info span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: rgba(255,255,255,0.42);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.toggle {
+
+    position: relative;
+
+    width: 48px;
+
+    height: 26px;
+}
+
+
+.toggle input {
+
+    opacity: 0;
+
+    width: 0;
+
+    height: 0;
+}
+
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    cursor: pointer;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.12);
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    transition: 0.25s;
+}
+
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+
+    height: 18px;
+
+    left: 3px;
+
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.65);
+
+    transition: 0.25s;
+}
+
+
+.toggle input:checked + .slider {
+
+    background: rgba(212,175,55,0.30);
+
+    border-color: rgba(212,175,55,0.55);
+}
+
+
+.toggle input:checked + .slider::before {
+
+    transform: translateX(22px);
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.settings-message {
+
+    max-width: 950px;
+
+    margin: 0 auto 20px;
+
+    padding: 13px 17px;
+
+    border-radius: 12px;
+
+    background: rgba(212,175,55,0.08);
+
+    border: 1px solid rgba(212,175,55,0.20);
+
+    color: rgba(255,255,255,0.85);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .settings-page {
+
+        padding: 35px 20px 60px;
+    }
+
+    .settings-header {
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+        flex-direction: column;
+    }
+
+    .settings-card {
+
+        padding: 25px 20px;
+    }
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+    }
+
+}
