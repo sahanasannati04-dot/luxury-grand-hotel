@@ -465,6 +465,30 @@ Computer Science and Design
 
 ---
 
+## Screenshots
+
+### Home Page
+![Luxury Grand Hotel Home Page](screenshots/01-home.png)
+
+### Rooms & Search
+![Rooms Page](screenshots/02a-rooms.png)
+
+![Room Search and Filtering](screenshots/02b-rooms.png)
+
+### Booking Details
+![Booking Details](screenshots/03a-booking-detail.png)
+
+![Booking Details and Actions](screenshots/03b-booking-detail.png)
+
+### Gemini AI Chatbot
+![Gemini AI Hotel Assistant](screenshots/04-chatbot.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/05-admin-dashboard.png)
+
+### Analytics & Reports
+![Analytics and Reports](screenshots/06-analytics-reports.png)
+
 ## 📌 Repository
 
 This repository contains the source code and development documentation for the **Luxury Grand Hotel** full-stack web application.
