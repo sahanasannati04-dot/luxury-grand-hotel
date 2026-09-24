@@ -4,3 +4,4 @@ google-genai==2.14.0
 qrcode
 Pillow
 razorpay
+reportlab
