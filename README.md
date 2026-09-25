@@ -1,222 +1,343 @@
 # 🏨 Luxury Grand Hotel
 
-### Full-Stack Hotel Management & Booking System with Gemini AI
+### Full-Stack Hotel Management & Booking Platform with Gemini AI
 
-**Luxury Grand Hotel** is a full-stack hotel management and online booking web application developed using **Python and Django**, with a modern responsive frontend and an integrated **Gemini AI chatbot**.
-
-The application provides a complete hotel booking experience for customers while also providing administrative tools for managing rooms, users, bookings, revenue, reports, notifications, and hotel settings.
+> **Luxury Grand Hotel** is a full-stack hotel management and booking platform built with **Python, Django, JavaScript, Bootstrap, SQLite, and Google Gemini AI**. It combines a premium guest experience with a custom administrative system for managing rooms, bookings, users, analytics, and hotel operations.
 
 ---
 
 ## ✨ Project Overview
 
-Luxury Grand Hotel is designed as a modern hotel management platform that combines:
+Luxury Grand Hotel is a **database-driven full-stack web application** designed to simulate the digital operations of a modern hotel.
 
-* 🏨 Hotel room management
-* 📅 Online room booking
-* 👤 User authentication
-* ❤️ Wishlist management
-* ⭐ Reviews and ratings
-* 🤖 Gemini AI-powered chatbot
-* 📊 Admin dashboard and analytics
-* 📈 Booking and revenue reports
-* 📧 Email notifications
-* 🧾 Booking invoice generation
-* 📱 Responsive and premium user interface
-* 🔐 Environment-based configuration for sensitive credentials
+The platform provides separate experiences for **guests and administrators**:
 
-The project follows a full-stack architecture where **Django handles the backend, business logic, database operations, authentication, booking management, and administrative functionality**, while the frontend provides the user-facing hotel experience.
+* Guests can discover rooms, search and filter available rooms, make and manage bookings, maintain a wishlist, submit reviews, view booking history, and interact with an AI-powered hotel assistant.
+* Administrators can manage rooms, bookings, users, hotel configuration, notifications, and operational analytics through a dedicated custom dashboard.
+
+The project focuses not only on UI development, but also on **backend business logic, database relationships, authentication, authorization, booking validation, AI integration, automated communication, and administrative workflows**.
 
 ---
 
-## 🚀 Key Features
+# 🚀 Key Features
 
-### 👤 User Authentication
+### 👤 Authentication & User Management
 
-* User registration
-* Secure login and logout
-* Authentication-protected booking features
-* User-specific booking history
+* User registration and login
+* Secure logout
+* Authentication-protected features
+* User-specific bookings
 * User-specific wishlist
-* Profile-based booking management
+* Protected booking operations
+* Role-aware administrative access
 
 ### 🛏️ Room Management
 
+* Dynamic room catalogue
 * Multiple room categories
-* Room pricing
 * Room images
-* Room availability management
-* Room search and filtering
-* Room-type filtering
-* Price-range filtering
-* Detailed room information
+* Room descriptions
+* Room numbers
+* Dynamic pricing
+* Availability status
+* Room detail pages
+* Search and filtering
 
-### 📅 Hotel Booking System
+### 🔎 Search & Filtering
 
-* Room booking
+Guests can find rooms using:
+
+* Keyword search
+* Room-type filters
+* Price-range filters
+* Availability information
+* Rating information
+
+### 📅 Booking Management
+
+The booking system supports:
+
 * Check-in and check-out dates
 * Guest selection
-* Automatic booking price calculation
-* Room availability validation
-* Booking conflict prevention
-* Booking confirmation
+* Automatic stay-duration calculation
+* Automatic total-price calculation
+* Booking creation
+* Booking modification
+* Booking cancellation
 * Booking history
-* Modify booking
-* Cancel booking
-* Delete booking
-* QR-code based booking information
-* Downloadable booking invoice
+* Booking status tracking
+* QR-code booking information
 
 ### ❤️ Wishlist
 
-* Add rooms to wishlist
-* Remove rooms from wishlist
-* User-specific wishlist management
+Users can:
+
+* Add rooms to their wishlist
+* Remove saved rooms
+* View saved rooms
+* Maintain a personal wishlist across sessions
+
+The database design prevents duplicate wishlist entries for the same user and room.
 
 ### ⭐ Reviews & Ratings
 
-* Submit hotel/booking reviews
+The application includes a booking-linked review system with:
+
 * 1–5 star ratings
-* Display room rating information
+* Written reviews
+* Room rating display
 * Average rating calculation
-
-### 🤖 Gemini AI Hotel Assistant
-
-The application includes an integrated **Gemini AI chatbot** that acts as a virtual hotel assistant.
-
-The chatbot can assist users with:
-
-* Hotel-related questions
-* Room information
-* Booking conversations
-* Room-type selection
-* Booking details
-* Guided booking flow
-* Interactive responses
-
-The chatbot is integrated into the Django application through a dedicated chatbot backend.
-
-### 📊 Admin Dashboard
-
-A dedicated custom admin dashboard provides management functionality for hotel administrators.
-
-#### Dashboard
-
-* Booking statistics
-* Room statistics
-* User statistics
-* Revenue information
-* Booking status overview
-
-#### Room Management
-
-* Add rooms
-* Manage rooms
-* Update room information
-* Manage room availability
-* Upload room images
-
-#### Booking Management
-
-* View bookings
-* Monitor booking statuses
-* Manage booking information
-* Track booking activity
-
-#### User Management
-
-* View registered users
-* Search users
-* Monitor user statistics
-
-#### Analytics & Reports
-
-* Revenue analytics
-* Booking analytics
-* Monthly booking trends
-* Completion and cancellation statistics
-* Room availability statistics
-* Room-type analysis
-* Booking-status analysis
-* Top-performing rooms
-
-### 📧 Email Notifications
-
-The application supports automated email notifications for relevant booking activities, including booking confirmation information and QR-code details.
-
-### ⚙️ Admin Settings
-
-The custom admin dashboard includes configurable sections for:
-
-* Hotel Settings
-* Notification Settings
-* Security Settings
-* Admin Profile
+* Rating count
+* Review eligibility based on completed stays
 
 ---
 
-# 🛠️ Technology Stack
+# 🤖 Gemini AI Hotel Assistant
 
-## Backend
+One of the major features of Luxury Grand Hotel is its integrated **Gemini AI hotel assistant**.
 
-* **Python**
-* **Django**
-* Django ORM
-* Django Authentication
-* Django Email Backend
+Instead of treating AI as a separate demonstration, the chatbot is integrated directly into the hotel application.
 
-## Frontend
+### AI assistant capabilities
 
-* **HTML5**
-* **CSS3**
-* **JavaScript**
-* **Bootstrap 5**
-* **Bootstrap Icons**
+* Hotel-related assistance
+* Room information
+* Room guidance
+* Booking assistance
+* Conversational interaction
+* Context-aware responses
+* Client-side conversation history
 
-## Artificial Intelligence
+### Architecture
 
-* **Google Gemini API**
-* Gemini AI chatbot
+```text
+Guest
+  ↓
+Chatbot Interface
+  ↓
+Django Chatbot Endpoint
+  ↓
+Google Gemini API
+  ↓
+AI Response
+  ↓
+Guest
+```
 
-## Database
+The chatbot provides an interactive concierge-style experience while remaining part of the main hotel application.
 
-* **SQLite** for development
+---
 
-## Additional Technologies
+# 🏢 Custom Admin Dashboard
 
-* QR Code generation
-* SMTP email integration
-* Environment variables
-* Git & GitHub
+The project includes a **custom-built administrative dashboard** rather than relying only on Django's default admin interface.
+
+### Dashboard modules
+
+```text
+Admin Dashboard
+│
+├── Dashboard
+├── Bookings
+├── Rooms
+├── Users
+├── Revenue
+├── Reports
+└── Settings
+```
+
+### Administrative capabilities
+
+* Room management
+* Booking management
+* User management
+* Booking statistics
+* Revenue information
+* Operational reports
+* Hotel settings
+* Notification settings
+* Security settings
+* Admin profile management
+
+---
+
+# 🛏️ Admin Room Management
+
+Administrators can manage hotel inventory through a dedicated interface.
+
+### Includes
+
+* Add rooms
+* Edit rooms
+* Delete rooms
+* Room number management
+* Room-type management
+* Price management
+* Description management
+* Image upload
+* Availability management
+* Search
+* Room-type filtering
+* Availability filtering
+
+---
+
+# 📊 Analytics & Reports
+
+The administrative dashboard provides operational insights into hotel activity.
+
+### Reporting areas include
+
+* Total bookings
+* Pending bookings
+* Confirmed bookings
+* Completed bookings
+* Cancelled bookings
+* Revenue information
+* Room availability
+* Booking trends
+* Completion statistics
+* Cancellation statistics
+* Room-type analysis
+* Booking-status analysis
+* Top room information
+* User statistics
+
+This transforms the application from a basic booking website into a more complete **hotel operations management system**.
+
+---
+
+# 🧠 Booking Business Logic
+
+A key backend component is the room availability validation system.
+
+Before creating a booking, the application checks whether the requested room and dates conflict with existing active reservations.
+
+```text
+Requested Booking
+       │
+       ▼
+Check Room
+       │
+       ▼
+Check Date Range
+       │
+       ▼
+Find Overlapping Active Bookings
+       │
+       ├── Conflict → Reject Booking
+       │
+       └── No Conflict → Continue
+```
+
+The system considers relevant booking states when determining whether a room is already reserved.
+
+This prevents overlapping reservations while allowing incomplete booking attempts to avoid permanently blocking room inventory.
+
+---
+
+# 🔄 Booking Lifecycle
+
+Bookings are managed through defined states:
+
+```text
+Pending
+   │
+   ├── Confirmed
+   │      │
+   │      └── Completed
+   │
+   └── Cancelled
+```
+
+This state-based approach allows the application to distinguish between an upcoming reservation, a completed stay, and a cancelled booking.
+
+---
+
+# 📧 Email & QR Booking Communication
+
+The application connects booking operations with automated communication.
+
+After the relevant booking workflow is completed, users can receive booking information through email.
+
+The system also generates **QR-code information associated with bookings**, providing a convenient digital representation of reservation details.
+
+---
+
+# 🎨 Premium Hospitality UI
+
+The frontend was designed specifically for a **luxury hotel experience** rather than a generic CRUD application.
+
+### Design direction
+
+* Premium dark visual theme
+* Gold-accented interactions
+* Glassmorphism-inspired components
+* Modern typography
+* Responsive layouts
+* Hotel-focused visual hierarchy
+* Interactive navigation
+* Premium room cards
+* Custom booking interfaces
+* Dedicated chatbot experience
+* Separate guest and admin interfaces
+
+The overall visual direction is inspired by the polished digital experiences associated with modern luxury hospitality brands.
 
 ---
 
 # 🏗️ Application Architecture
 
 ```text
-                    ┌──────────────────────────┐
-                    │        Frontend          │
-                    │                          │
-                    │ HTML • CSS • JavaScript  │
-                    │ Bootstrap • UI Components│
-                    └────────────┬─────────────┘
-                                 │
-                                 ▼
-                    ┌──────────────────────────┐
-                    │      Django Backend      │
-                    │                          │
-                    │ Views • URLs • Forms     │
-                    │ Authentication           │
-                    │ Business Logic           │
-                    └────────────┬─────────────┘
-                                 │
-                  ┌──────────────┼──────────────┐
-                  ▼              ▼              ▼
-          ┌────────────┐  ┌────────────┐  ┌────────────┐
-          │  Database  │  │ Gemini AI  │  │   Email    │
-          │   SQLite   │  │  Chatbot   │  │   SMTP     │
-          └────────────┘  └────────────┘  └────────────┘
+                         ┌──────────────────────┐
+                         │   Guest / Admin UI   │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │    Frontend Layer    │
+                         │                      │
+                         │ HTML • CSS • JS      │
+                         │ Bootstrap            │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │   Django Backend     │
+                         │                      │
+                         │ Views • URLs • Forms │
+                         │ Authentication       │
+                         │ Business Logic       │
+                         └───────┬───────┬──────┘
+                                 │       │
+                    ┌────────────┘       └────────────┐
+                    ▼                                 ▼
+          ┌──────────────────┐              ┌──────────────────┐
+          │     Database     │              │ External Services│
+          │                  │              │                  │
+          │ Django ORM       │              │ Gemini AI        │
+          │ SQLite           │              │ SMTP Email       │
+          │ Model Relations  │              │ QR Generation    │
+          └──────────────────┘              └──────────────────┘
 ```
+
+---
+
+# 🛠️ Technology Stack
+
+| Layer               | Technologies            |
+| ------------------- | ----------------------- |
+| **Backend**         | Python, Django          |
+| **Frontend**        | HTML5, CSS3, JavaScript |
+| **UI Framework**    | Bootstrap 5             |
+| **Icons**           | Bootstrap Icons         |
+| **AI**              | Google Gemini API       |
+| **Database**        | SQLite                  |
+| **ORM**             | Django ORM              |
+| **Email**           | Django Email / SMTP     |
+| **QR Generation**   | QR Code Library         |
+| **Version Control** | Git, GitHub             |
+| **Configuration**   | Environment Variables   |
 
 ---
 
@@ -247,11 +368,12 @@ luxury-grand-hotel/
 │   ├── wsgi.py
 │   └── ...
 │
-├── static/
-│
 ├── templates/
+├── static/
+├── screenshots/
 │
 ├── manage.py
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -260,176 +382,156 @@ luxury-grand-hotel/
 
 # 🔐 Security & Configuration
 
-Sensitive credentials are managed through environment variables rather than being stored directly in the source code.
-
-Examples include:
-
-```text
-SECRET_KEY
-GEMINI_API_KEY
-EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD
-RAZORPAY_KEY_ID
-RAZORPAY_KEY_SECRET
-```
-
-The `.env` file is excluded from version control through `.gitignore`.
-
----
-
-# ⚙️ Local Installation
-
-## 1. Clone the repository
-
-```bash
-git clone <your-github-repository-url>
-cd luxury-grand-hotel
-```
-
-## 2. Create a virtual environment
-
-```bash
-python -m venv venv
-```
-
-Activate it on Windows:
-
-```powershell
-venv\Scripts\activate
-```
-
-## 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-## 4. Configure environment variables
-
-Create a `.env` file in the project root and configure the required credentials.
+The project uses environment-based configuration for sensitive credentials.
 
 Example:
 
-```text
+```env
 SECRET_KEY=your-secret-key
 GEMINI_API_KEY=your-gemini-api-key
 EMAIL_HOST_USER=your-email
 EMAIL_HOST_PASSWORD=your-email-app-password
 ```
 
-## 5. Apply database migrations
+Sensitive credentials should remain outside the source code and should never be committed to the public repository.
+
+The application also uses authentication and staff-level access controls for administrative functionality.
+
+---
+
+# 🧪 Functional Testing
+
+The application has been manually tested across its major workflows.
+
+### Customer-side
+
+* Registration
+* Login/logout
+* Room browsing
+* Search
+* Filtering
+* Room availability
+* Booking creation
+* Booking validation
+* Booking modification
+* Booking cancellation
+* Booking history
+* Wishlist
+* Reviews and ratings
+* QR-code generation
+* Email communication
+* Gemini chatbot
+
+### Admin-side
+
+* Dashboard access
+* Room management
+* Booking management
+* User management
+* Analytics
+* Reports
+* Settings
+* Staff-only access
+
+---
+
+# 📸 Application Screenshots
+
+## 🏠 Home Page
+
+![Luxury Grand Hotel Home Page](screenshots/01-home.png)
+
+## 🛏️ Rooms & Search
+
+![Luxury Grand Hotel Rooms](screenshots/02a-rooms.png)
+
+## 📅 Booking Details
+
+![Luxury Grand Hotel Booking Details](screenshots/03a-booking-detail.png)
+
+## 🤖 Gemini AI Hotel Assistant
+
+![Luxury Grand Hotel Gemini AI Chatbot](screenshots/04-chatbot.png)
+
+## 📊 Admin Dashboard
+
+![Luxury Grand Hotel Admin Dashboard](screenshots/05-admin-dashboard.png)
+
+## 📈 Analytics & Reports
+
+![Luxury Grand Hotel Analytics and Reports](screenshots/06-analytics-reports.png)
+
+---
+
+# ⚙️ Local Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/sahanasannati04-dot/luxury-grand-hotel.git
+cd luxury-grand-hotel
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### 3. Activate the environment
+
+**Windows:**
+
+```bash
+venv\Scripts\activate
+```
+
+### 4. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Configure environment variables
+
+Create a `.env` file and add the required application credentials.
+
+### 6. Run migrations
 
 ```bash
 python manage.py migrate
 ```
 
-## 6. Create an administrator account
+### 7. Create an admin account
 
 ```bash
 python manage.py createsuperuser
 ```
 
-## 7. Start the development server
+### 8. Start the application
 
 ```bash
 python manage.py runserver
 ```
 
-Then open the local Django development server in your browser.
-
 ---
 
-# 🧪 Testing
+# 📌 Project Highlights
 
-The application has been tested across major functional areas including:
-
-* User registration and authentication
-* Room browsing and filtering
-* Room availability
-* Hotel booking
-* Booking conflict validation
-* Booking modification
-* Booking cancellation
-* Booking deletion
-* Booking history
-* Wishlist
-* Reviews and ratings
-* QR-code generation
-* Email notifications
-* Admin dashboard
-* Room management
-* User management
-* Booking management
-* Analytics and reports
-* Admin settings
-* Gemini AI chatbot
-* AI-assisted booking workflow
-
----
-
-# 📈 Current Development Status
-
-### Completed
-
-* ✅ Authentication
-* ✅ Room Management
-* ✅ Room Search & Filtering
-* ✅ Booking System
-* ✅ Booking Availability Validation
-* ✅ Booking History
-* ✅ Modify Booking
-* ✅ Cancel Booking
-* ✅ Delete Booking
-* ✅ Wishlist
-* ✅ Reviews & Ratings
-* ✅ QR Code Booking
-* ✅ Invoice Generation
-* ✅ Admin Dashboard
-* ✅ Admin Room Management
-* ✅ Admin User Management
-* ✅ Admin Booking Management
-* ✅ Analytics & Reports
-* ✅ Email Notifications
-* ✅ Admin Settings
-* ✅ Gemini AI Chatbot
-* ✅ AI Booking Workflow
-* ✅ GitHub Repository Setup
-
-### Under Development / Planned
-
-* 🔄 Razorpay payment integration refinement
-* 🔄 Production deployment
-* 🔄 Final security hardening
-* 🔄 Responsive UI refinement
-* 🔄 Final performance and validation improvements
-
----
-
-# 💳 Payment Integration
-
-The project includes Razorpay payment integration code for online payment processing.
-
-The payment functionality is currently **under development/testing** and is not represented as a fully production-ready payment system.
-
----
-
-# 🎯 Project Goals
-
-The main goals of this project are to demonstrate practical full-stack development skills through a real-world hotel management application.
-
-The project focuses on:
-
-* Backend development with Django
-* Database-driven web applications
-* REST/API-based AI integration
-* Authentication and authorization
-* Business logic implementation
-* Booking and availability management
-* Administrative dashboards
-* Data analytics
-* Email automation
-* Modern responsive UI development
-* Secure environment configuration
+| Area                       | Implementation                            |
+| -------------------------- | ----------------------------------------- |
+| **Full-Stack Development** | Django + HTML/CSS/JS + Bootstrap          |
+| **Database Design**        | Relational Django models                  |
+| **Booking System**         | Date-based reservation workflow           |
+| **Business Logic**         | Room conflict and availability validation |
+| **AI Integration**         | Google Gemini hotel assistant             |
+| **Administration**         | Custom hotel management dashboard         |
+| **Analytics**              | Booking and operational reporting         |
+| **Communication**          | Automated email + QR booking information  |
+| **Personalization**        | Wishlist + reviews and ratings            |
+| **Security**               | Authentication + staff access control     |
+| **Configuration**          | Environment-based credentials             |
+| **Version Control**        | Git + GitHub                              |
 
 ---
 
@@ -437,58 +539,44 @@ The project focuses on:
 
 Possible future improvements include:
 
+* PostgreSQL database migration
 * Production deployment
-* PostgreSQL database
-* Cloud media storage
-* Advanced payment processing
-* Advanced hotel analytics
-* Multi-hotel support
-* Online check-in/check-out
+* Cloud-based media storage
+* Advanced AI-powered recommendations
 * Automated booking reminders
-* Advanced AI hotel recommendations
 * Real-time notifications
-* Improved accessibility and performance
+* Multi-property hotel support
+* Online check-in/check-out
+* Additional performance optimization
+* Further accessibility improvements
 
 ---
 
 # 👩‍💻 Author
 
-**Sahana Sannati**
+### Sahana Sannati
 
-Computer Science and Design
+**Computer Science and Design | Full-Stack Developer**
+
+**Sharnbasva University, Kalaburagi**
+
+Passionate about building **full-stack web applications, AI-integrated solutions, and practical software products** using modern web technologies.
+
+### 🔗 Connect
+
+**GitHub:** [github.com/sahanasannati04-dot](https://github.com/sahanasannati04-dot)
+
 
 ---
 
-## ⭐ Project Highlights
+## ⭐ Project Summary
 
-> A complete full-stack hotel management platform combining **Django backend development, modern frontend design, database management, AI integration, booking workflows, administrative analytics, and automated communication** in a single real-world web application.
+**Luxury Grand Hotel** demonstrates how a real-world hospitality workflow can be transformed into a complete full-stack application by combining **Django backend development, database-driven booking logic, premium frontend design, AI integration, administrative operations, analytics, automated communication, and user-focused features**.
+
+> **Built as a hands-on full-stack engineering project with a focus on practical application architecture, business logic, AI integration, and modern web development.**
 
 ---
 
-## Screenshots
+### 🏷️ Tech Keywords
 
-### Home Page
-![Luxury Grand Hotel Home Page](screenshots/01-home.png)
-
-### Rooms & Search
-![Rooms Page](screenshots/02a-rooms.png)
-
-![Room Search and Filtering](screenshots/02b-rooms.png)
-
-### Booking Details
-![Booking Details](screenshots/03a-booking-detail.png)
-
-![Booking Details and Actions](screenshots/03b-booking-detail.png)
-
-### Gemini AI Chatbot
-![Gemini AI Hotel Assistant](screenshots/04-chatbot.png)
-
-### Admin Dashboard
-![Admin Dashboard](screenshots/05-admin-dashboard.png)
-
-### Analytics & Reports
-![Analytics and Reports](screenshots/06-analytics-reports.png)
-
-## 📌 Repository
-
-This repository contains the source code and development documentation for the **Luxury Grand Hotel** full-stack web application.
+`Python` `Django` `JavaScript` `HTML5` `CSS3` `Bootstrap` `SQLite` `Gemini AI` `Django ORM` `SMTP` `QR Code` `Git` `GitHub`
