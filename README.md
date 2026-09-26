@@ -468,8 +468,8 @@ The application has been manually tested across its major workflows.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/sahanasannati04-dot/luxury-grand-hotel.git
-cd luxury-grand-hotel
+git clone https://github.com/sahanasannati04-dot/Hotel Management & Booking System.git
+cd Hotel Management & Booking System
 ```
 
 ### 2. Create a virtual environment
