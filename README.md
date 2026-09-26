@@ -344,7 +344,7 @@ The overall visual direction is inspired by the polished digital experiences ass
 # 📁 Project Structure
 
 ```text
-luxury-grand-hotel/
+hotel-management-booking-system/
 │
 ├── chatbot/
 │   ├── templates/
@@ -468,8 +468,8 @@ The application has been manually tested across its major workflows.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/sahanasannati04-dot/Hotel Management & Booking System.git
-cd Hotel Management & Booking System
+git clone https://github.com/sahanasannati04-dot/hotel-management-booking-system.git
+cd hotel-management-booking-system
 ```
 
 ### 2. Create a virtual environment
