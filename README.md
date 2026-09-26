@@ -1,4 +1,4 @@
-# 🏨 Luxury Grand Hotel
+# 🏨 Hotel Management & Booking System
 
 ### Full-Stack Hotel Management & Booking Platform with Gemini AI
 
